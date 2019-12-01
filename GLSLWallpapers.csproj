@@ -76,6 +76,7 @@
         <Compile Include="Display\ShaderProgram.cs" />
         <Compile Include="Display\Uniform.cs" />
         <Compile Include="Helpers\Logger.cs" />
+        <Compile Include="Helpers\MathUtils.cs" />
         <Compile Include="Helpers\RegistryUtils.cs" />
         <Compile Include="Helpers\ShaderRegistry.cs" />
         <Compile Include="Reference.cs" />

@@ -21,7 +21,7 @@ namespace GLSLWallpapers.Display {
 
         float Time { get; set; }
 
-        public static readonly ConcurrentQueue<string> QUEUE = new ConcurrentQueue<string>();
+        static readonly ConcurrentQueue<string> queue = new ConcurrentQueue<string>();
 
         public static DisplayWindow Instance { get; private set; }
 
@@ -30,13 +30,15 @@ namespace GLSLWallpapers.Display {
             Instance = this;
 
             Win32.SetWindowAsDesktopChild(WindowInfo.Handle);
-            
+
             Size = new Size(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height);
             Location = new Point(0, 0);
-            
-            Config.UpdateFrequencyChange += (sender, i) => TargetRenderFrequency = i;
-            Config.ShaderChange += (sender, s) => QUEUE.Enqueue(ShaderRegistry.Shaders[s].Code);
+
+            Config.FramesPerSecondChange += (sender, i) => TargetRenderFrequency = i;
+            Config.UpdatesPerSecondChange += (sender, i) => TargetUpdateFrequency = i;
+            Config.ShaderChange += (sender, s) => queue.Enqueue(ShaderRegistry.Shaders[s].Code);
         }
+
         protected override void OnLoad(EventArgs e) {
             base.OnLoad(e);
 
@@ -109,7 +111,7 @@ namespace GLSLWallpapers.Display {
         protected override void OnUpdateFrame(FrameEventArgs e) {
             base.OnUpdateFrame(e);
 
-            QUEUE.TryDequeue(out string code);
+            queue.TryDequeue(out string code);
             if (code != null) {
                 try {
                     SetShaders(null, code);
@@ -145,7 +147,7 @@ namespace GLSLWallpapers.Display {
             base.OnRenderFrame(e);
         }
 
-        public static void CheckOpenGLerror() {
+        static void CheckOpenGLerror() {
             ErrorCode code = GL.GetError();
 
             if (code != ErrorCode.NoError) {

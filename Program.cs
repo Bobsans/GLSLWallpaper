@@ -40,7 +40,7 @@ namespace GLSLWallpapers {
 
             icon.DoubleClick += (sender, args) => ShowSettingsForm();
 
-            new Thread(() => new DisplayWindow().Run(60.0f, Config.UpdateFrequency)).Start();
+            new Thread(() => new DisplayWindow().Run(Config.UpdatesPerSecond, Config.FramesPerSecond)).Start();
         }
 
         static void ShowSettingsForm() {

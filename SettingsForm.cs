@@ -9,11 +9,11 @@ namespace GLSLWallpapers {
     public partial class SettingsForm : Form {
         public SettingsForm() {
             InitializeComponent();
-            
-            foreach (KeyValuePair<string,ShaderInfo> pair in ShaderRegistry.Shaders) {
+
+            foreach (KeyValuePair<string, ShaderInfo> pair in ShaderRegistry.Shaders) {
                 ShaderListView.Add(new ShaderListItem(pair.Value));
             }
-            
+
             ShaderListView.ApplyButtonCLick += (sender, info) => Config.ShaderName = info.FileName;
         }
 
@@ -25,8 +25,11 @@ namespace GLSLWallpapers {
             TrackBarTimeScale.Value = Config.TimeScale;
             LabelTimeScaleValue.Text = $@"x{(float)Config.TimeScale / 1000:0.00}";
 
-            TrackBarUpdateFrequency.Value = Config.UpdateFrequency;
-            LabelUpdateFrequencyValue.Text = $@"{Config.UpdateFrequency} fps";
+            TrackBarFramesPerSecond.Value = Config.FramesPerSecond;
+            LabelFramesPerSecondValue.Text = $@"{Config.FramesPerSecond} fps";
+
+            TrackBarUpdatesPerSecond.Value = Config.UpdatesPerSecond;
+            LabelUpdatesPerSecondValue.Text = $@"{Config.UpdatesPerSecond} ups";
 
             CheckBoxMouseInteract.Checked = Config.MouseInteract;
         }
@@ -41,9 +44,14 @@ namespace GLSLWallpapers {
             LabelTimeScaleValue.Text = $@"x{(float)Config.TimeScale / 1000:0.00}";
         }
 
-        void TrackBarUpdateFrequency_Scroll(object sender, EventArgs e) {
-            Config.UpdateFrequency = TrackBarUpdateFrequency.Value;
-            LabelUpdateFrequencyValue.Text = $@"{Config.UpdateFrequency} fps";
+        void TrackBarFramesPerSecond_Scroll(object sender, EventArgs e) {
+            Config.FramesPerSecond = TrackBarFramesPerSecond.Value;
+            LabelFramesPerSecondValue.Text = $@"{Config.FramesPerSecond} fps";
+        }
+
+        void TrackBarUpdatesPerSecond_Scroll(object sender, EventArgs e) {
+            Config.UpdatesPerSecond = TrackBarUpdatesPerSecond.Value;
+            LabelUpdatesPerSecondValue.Text = $@"{Config.UpdatesPerSecond} ups";
         }
 
         void CheckBoxMouseInteract_CheckedChanged(object sender, EventArgs e) {

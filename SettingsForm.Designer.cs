@@ -27,26 +27,33 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.CheckBoxMouseInteract = new System.Windows.Forms.CheckBox();
-            this.LabelUpdateFrequencyValue = new System.Windows.Forms.Label();
+            this.LabelUpdatesPerSecondValue = new System.Windows.Forms.Label();
+            this.LabelFramesPerSecondValue = new System.Windows.Forms.Label();
             this.LabelTimeScaleValue = new System.Windows.Forms.Label();
-            this.LabelUpdateFrequency = new System.Windows.Forms.Label();
+            this.LabelUpdatesPerSecond = new System.Windows.Forms.Label();
+            this.LabelFramesPerSecond = new System.Windows.Forms.Label();
             this.TimeScaleLabel = new System.Windows.Forms.Label();
-            this.TrackBarUpdateFrequency = new System.Windows.Forms.TrackBar();
+            this.TrackBarUpdatesPerSecond = new System.Windows.Forms.TrackBar();
+            this.TrackBarFramesPerSecond = new System.Windows.Forms.TrackBar();
             this.TrackBarTimeScale = new System.Windows.Forms.TrackBar();
             this.ShaderListView = new GLSLWallpapers.Components.ShaderList();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TrackBarUpdateFrequency)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackBarUpdatesPerSecond)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackBarFramesPerSecond)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarTimeScale)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.CheckBoxMouseInteract);
-            this.groupBox1.Controls.Add(this.LabelUpdateFrequencyValue);
+            this.groupBox1.Controls.Add(this.LabelUpdatesPerSecondValue);
+            this.groupBox1.Controls.Add(this.LabelFramesPerSecondValue);
             this.groupBox1.Controls.Add(this.LabelTimeScaleValue);
-            this.groupBox1.Controls.Add(this.LabelUpdateFrequency);
+            this.groupBox1.Controls.Add(this.LabelUpdatesPerSecond);
+            this.groupBox1.Controls.Add(this.LabelFramesPerSecond);
             this.groupBox1.Controls.Add(this.TimeScaleLabel);
-            this.groupBox1.Controls.Add(this.TrackBarUpdateFrequency);
+            this.groupBox1.Controls.Add(this.TrackBarUpdatesPerSecond);
+            this.groupBox1.Controls.Add(this.TrackBarFramesPerSecond);
             this.groupBox1.Controls.Add(this.TrackBarTimeScale);
             this.groupBox1.Location = new System.Drawing.Point(12, 3);
             this.groupBox1.Name = "groupBox1";
@@ -57,7 +64,7 @@
             // 
             // CheckBoxMouseInteract
             // 
-            this.CheckBoxMouseInteract.Location = new System.Drawing.Point(124, 93);
+            this.CheckBoxMouseInteract.Location = new System.Drawing.Point(124, 132);
             this.CheckBoxMouseInteract.Name = "CheckBoxMouseInteract";
             this.CheckBoxMouseInteract.Size = new System.Drawing.Size(412, 24);
             this.CheckBoxMouseInteract.TabIndex = 4;
@@ -65,14 +72,23 @@
             this.CheckBoxMouseInteract.UseVisualStyleBackColor = true;
             this.CheckBoxMouseInteract.CheckedChanged += new System.EventHandler(this.CheckBoxMouseInteract_CheckedChanged);
             // 
-            // LabelUpdateFrequencyValue
+            // LabelUpdatesPerSecondValue
             // 
-            this.LabelUpdateFrequencyValue.Location = new System.Drawing.Point(6, 73);
-            this.LabelUpdateFrequencyValue.Name = "LabelUpdateFrequencyValue";
-            this.LabelUpdateFrequencyValue.Size = new System.Drawing.Size(120, 18);
-            this.LabelUpdateFrequencyValue.TabIndex = 3;
-            this.LabelUpdateFrequencyValue.Text = "60 fps";
-            this.LabelUpdateFrequencyValue.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.LabelUpdatesPerSecondValue.Location = new System.Drawing.Point(6, 110);
+            this.LabelUpdatesPerSecondValue.Name = "LabelUpdatesPerSecondValue";
+            this.LabelUpdatesPerSecondValue.Size = new System.Drawing.Size(120, 18);
+            this.LabelUpdatesPerSecondValue.TabIndex = 3;
+            this.LabelUpdatesPerSecondValue.Text = "60 ups";
+            this.LabelUpdatesPerSecondValue.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // LabelFramesPerSecondValue
+            // 
+            this.LabelFramesPerSecondValue.Location = new System.Drawing.Point(6, 73);
+            this.LabelFramesPerSecondValue.Name = "LabelFramesPerSecondValue";
+            this.LabelFramesPerSecondValue.Size = new System.Drawing.Size(120, 18);
+            this.LabelFramesPerSecondValue.TabIndex = 3;
+            this.LabelFramesPerSecondValue.Text = "60 fps";
+            this.LabelFramesPerSecondValue.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // LabelTimeScaleValue
             // 
@@ -83,14 +99,23 @@
             this.LabelTimeScaleValue.Text = "x1.0";
             this.LabelTimeScaleValue.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // LabelUpdateFrequency
+            // LabelUpdatesPerSecond
             // 
-            this.LabelUpdateFrequency.Location = new System.Drawing.Point(6, 57);
-            this.LabelUpdateFrequency.Name = "LabelUpdateFrequency";
-            this.LabelUpdateFrequency.Size = new System.Drawing.Size(120, 22);
-            this.LabelUpdateFrequency.TabIndex = 2;
-            this.LabelUpdateFrequency.Text = "Update frequency";
-            this.LabelUpdateFrequency.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.LabelUpdatesPerSecond.Location = new System.Drawing.Point(6, 93);
+            this.LabelUpdatesPerSecond.Name = "LabelUpdatesPerSecond";
+            this.LabelUpdatesPerSecond.Size = new System.Drawing.Size(120, 22);
+            this.LabelUpdatesPerSecond.TabIndex = 2;
+            this.LabelUpdatesPerSecond.Text = "Updates per second";
+            this.LabelUpdatesPerSecond.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // LabelFramesPerSecond
+            // 
+            this.LabelFramesPerSecond.Location = new System.Drawing.Point(6, 57);
+            this.LabelFramesPerSecond.Name = "LabelFramesPerSecond";
+            this.LabelFramesPerSecond.Size = new System.Drawing.Size(120, 22);
+            this.LabelFramesPerSecond.TabIndex = 2;
+            this.LabelFramesPerSecond.Text = "Frames per second";
+            this.LabelFramesPerSecond.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // TimeScaleLabel
             // 
@@ -101,18 +126,31 @@
             this.TimeScaleLabel.Text = "Time scale";
             this.TimeScaleLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // TrackBarUpdateFrequency
+            // TrackBarUpdatesPerSecond
             // 
-            this.TrackBarUpdateFrequency.LargeChange = 10;
-            this.TrackBarUpdateFrequency.Location = new System.Drawing.Point(124, 57);
-            this.TrackBarUpdateFrequency.Maximum = 120;
-            this.TrackBarUpdateFrequency.Minimum = 1;
-            this.TrackBarUpdateFrequency.Name = "TrackBarUpdateFrequency";
-            this.TrackBarUpdateFrequency.Size = new System.Drawing.Size(412, 45);
-            this.TrackBarUpdateFrequency.TabIndex = 1;
-            this.TrackBarUpdateFrequency.TickFrequency = 10;
-            this.TrackBarUpdateFrequency.Value = 1;
-            this.TrackBarUpdateFrequency.Scroll += new System.EventHandler(this.TrackBarUpdateFrequency_Scroll);
+            this.TrackBarUpdatesPerSecond.LargeChange = 10;
+            this.TrackBarUpdatesPerSecond.Location = new System.Drawing.Point(124, 93);
+            this.TrackBarUpdatesPerSecond.Maximum = 120;
+            this.TrackBarUpdatesPerSecond.Minimum = 1;
+            this.TrackBarUpdatesPerSecond.Name = "TrackBarUpdatesPerSecond";
+            this.TrackBarUpdatesPerSecond.Size = new System.Drawing.Size(412, 45);
+            this.TrackBarUpdatesPerSecond.TabIndex = 1;
+            this.TrackBarUpdatesPerSecond.TickFrequency = 10;
+            this.TrackBarUpdatesPerSecond.Value = 1;
+            this.TrackBarUpdatesPerSecond.Scroll += new System.EventHandler(this.TrackBarUpdatesPerSecond_Scroll);
+            // 
+            // TrackBarFramesPerSecond
+            // 
+            this.TrackBarFramesPerSecond.LargeChange = 10;
+            this.TrackBarFramesPerSecond.Location = new System.Drawing.Point(124, 57);
+            this.TrackBarFramesPerSecond.Maximum = 120;
+            this.TrackBarFramesPerSecond.Minimum = 1;
+            this.TrackBarFramesPerSecond.Name = "TrackBarFramesPerSecond";
+            this.TrackBarFramesPerSecond.Size = new System.Drawing.Size(412, 45);
+            this.TrackBarFramesPerSecond.TabIndex = 1;
+            this.TrackBarFramesPerSecond.TickFrequency = 10;
+            this.TrackBarFramesPerSecond.Value = 1;
+            this.TrackBarFramesPerSecond.Scroll += new System.EventHandler(this.TrackBarFramesPerSecond_Scroll);
             // 
             // TrackBarTimeScale
             // 
@@ -152,7 +190,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TrackBarUpdateFrequency)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackBarUpdatesPerSecond)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackBarFramesPerSecond)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarTimeScale)).EndInit();
             this.ResumeLayout(false);
         }
@@ -164,9 +203,12 @@
         private System.Windows.Forms.TrackBar TrackBarTimeScale;
         private System.Windows.Forms.Label TimeScaleLabel;
         private System.Windows.Forms.Label LabelTimeScaleValue;
-        private System.Windows.Forms.TrackBar TrackBarUpdateFrequency;
-        private System.Windows.Forms.Label LabelUpdateFrequency;
-        private System.Windows.Forms.Label LabelUpdateFrequencyValue;
         private System.Windows.Forms.CheckBox CheckBoxMouseInteract;
+        private System.Windows.Forms.TrackBar TrackBarUpdatesPerSecond;
+        private System.Windows.Forms.Label LabelUpdatesPerSecond;
+        private System.Windows.Forms.Label LabelUpdatesPerSecondValue;
+        private System.Windows.Forms.Label LabelFramesPerSecondValue;
+        private System.Windows.Forms.Label LabelFramesPerSecond;
+        private System.Windows.Forms.TrackBar TrackBarFramesPerSecond;
     }
 }
