@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{B1D68E2C-C9B9-43E0-A55D-B1611CE4673B}</ProjectGuid>
+        <OutputType>WinExe</OutputType>
+        <RootNamespace>GLSLWallpapers</RootNamespace>
+        <AssemblyName>GLSLWallpapers</AssemblyName>
+        <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <Deterministic>true</Deterministic>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup>
+        <ApplicationIcon>icon.ico</ApplicationIcon>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c">
+          <HintPath>packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="OpenTK, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
+          <HintPath>packages\OpenTK.3.1.0\lib\net20\OpenTK.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.IO.Compression" />
+        <Reference Include="System.Xml.Linq" />
+        <Reference Include="System.Data.DataSetExtensions" />
+        <Reference Include="Microsoft.CSharp" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Deployment" />
+        <Reference Include="System.Drawing" />
+        <Reference Include="System.Net.Http" />
+        <Reference Include="System.Windows.Forms" />
+        <Reference Include="System.Xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Components\ShaderList.cs">
+          <SubType>UserControl</SubType>
+        </Compile>
+        <Compile Include="Components\ShaderList.Designer.cs">
+          <DependentUpon>ShaderList.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Components\ShaderListItem.cs">
+          <SubType>UserControl</SubType>
+        </Compile>
+        <Compile Include="Components\ShaderListItem.Designer.cs">
+          <DependentUpon>ShaderListItem.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Config.cs" />
+        <Compile Include="Display\DisplayWindow.cs" />
+        <Compile Include="Display\Shader.cs" />
+        <Compile Include="Display\ShaderProgram.cs" />
+        <Compile Include="Display\Uniform.cs" />
+        <Compile Include="Helpers\Logger.cs" />
+        <Compile Include="Helpers\RegistryUtils.cs" />
+        <Compile Include="Helpers\ShaderRegistry.cs" />
+        <Compile Include="Reference.cs" />
+        <Compile Include="SettingsForm.cs">
+            <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="SettingsForm.Designer.cs">
+            <DependentUpon>SettingsForm.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Helpers\Win32.cs" />
+        <Compile Include="Program.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <None Include="OpenTK.dll.config" />
+        <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="App.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Include="Components\ShaderList.resx">
+        <DependentUpon>ShaderList.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Components\ShaderListItem.resx">
+        <DependentUpon>ShaderListItem.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="SettingsForm.resx">
+        <DependentUpon>SettingsForm.cs</DependentUpon>
+      </EmbeddedResource>
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include=".gitignore" />
+      <Content Include="data\shaders\colorful-voronoi\info.ini" />
+      <Content Include="data\shaders\colorful-voronoi\screenshot.png" />
+      <Content Include="data\shaders\colorful-voronoi\shader.glsl" />
+      <Content Include="data\shaders\colorful-voronoi\thumbnail.png" />
+      <Content Include="data\shaders\donut\info.ini" />
+      <Content Include="data\shaders\donut\screenshot.png" />
+      <Content Include="data\shaders\donut\shader.glsl" />
+      <Content Include="data\shaders\donut\thumbnail.png" />
+      <Content Include="data\shaders\lightning\info.ini" />
+      <Content Include="data\shaders\lightning\screenshot.png" />
+      <Content Include="data\shaders\lightning\shader.glsl" />
+      <Content Include="data\shaders\lightning\thumbnail.png" />
+      <Content Include="data\shaders\voronoi-bubbles\info.ini" />
+      <Content Include="data\shaders\voronoi-bubbles\screenshot.png" />
+      <Content Include="data\shaders\voronoi-bubbles\shader.glsl" />
+      <Content Include="data\shaders\voronoi-bubbles\thumbnail.png" />
+      <Content Include="icon.ico" />
+      <Content Include="collect_release.py" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

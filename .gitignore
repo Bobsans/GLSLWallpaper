@@ -1,0 +1,9 @@
+# IDE
+.idea/
+*.DotSettings.user
+
+# Project
+bin/
+obj/
+packages/
+release/
