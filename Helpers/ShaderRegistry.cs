@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Windows.Forms;
 using IniParser;
 using IniParser.Model;
 
@@ -36,10 +38,40 @@ namespace GLSLWallpapers.Helpers {
         public static IEnumerable<ShaderInfo> All() {
             return shaders.Values.AsEnumerable();
         }
+
+        public static void Install(string path) {
+            if (path != null && File.Exists(path)) {
+                try {
+                    ShaderInfo info = ShaderInfo.FromFile(path);
+
+                    if (Has(info.FileName)) {
+                        DialogResult result = MessageBox.Show($@"Wallpaper ""{info.FileName}"" already exist. Rewrite?", @"Wallpaper exist", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (result == DialogResult.No) {
+                            return;
+                        }
+                    }
+
+                    string destPath = Path.Combine(Reference.SHADERS_DIRECTORY, Path.GetFileName(path));
+                    File.Copy(path, destPath, true);
+
+                    info.FilePath = destPath;
+
+                    shaders[info.FileName] = info;
+                    Config.ShaderName = info.FileName;
+
+                    return;
+                } catch(Exception ex) {
+                    Logger.Error($"Error wallpaper installation: {ex}");
+                }
+            }
+
+            MessageBox.Show($@"Invalid wallpaper file: ""{path}""");
+        }
     }
 
     public class ShaderInfo {
-        public string FilePath { get; private set; }
+        public string FilePath { get; set; }
         public string FileName => Path.GetFileNameWithoutExtension(FilePath);
         public string Name { get; private set; }
         public string Author { get; private set; }

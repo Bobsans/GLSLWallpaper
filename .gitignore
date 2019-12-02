@@ -1,10 +1,13 @@
 # IDE
 .idea/
 *.DotSettings.user
+.vs/
 
 # Project
 bin/
 obj/
 packages/
 release/
-/*.py
+*.py
+*.iss
+*.res

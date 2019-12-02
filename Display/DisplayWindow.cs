@@ -77,7 +77,7 @@ namespace GLSLWallpapers.Display {
                 Program?.Dispose();
                 InitShader(shaders);
             } else {
-                MessageBox.Show("Invalid sahder program", "Error");
+                MessageBox.Show(@"Invalid shader program", @"Error");
             }
         }
 

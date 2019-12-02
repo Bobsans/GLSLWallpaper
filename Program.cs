@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
 using System.Threading;
@@ -9,11 +10,13 @@ using GLSLWallpapers.Helpers;
 namespace GLSLWallpapers {
     static class Program {
         [STAThread]
-        static void Main() {
+        static void Main(string[] args) {
             Logger.FilePath = "./latest.log";
 
             ShaderRegistry.Load();
             Config.Load();
+
+            ProcessArguments(args);
 
             Application.SetCompatibleTextRenderingDefault(false);
             Application.EnableVisualStyles();
@@ -22,14 +25,24 @@ namespace GLSLWallpapers {
 
             Config.Save();
         }
+
+        static void ProcessArguments(IReadOnlyList<string> args) {
+            if (args.Count == 2) {
+                if (args[0] == "-install") {
+                    ShaderRegistry.Install(args[1]);
+                }
+            }
+        }
     }
 
     class Context : ApplicationContext {
+        static SettingsForm settings_form;
         readonly NotifyIcon icon;
 
         public Context() {
             icon = new NotifyIcon {
                 Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location),
+
                 ContextMenu = new ContextMenu(new[] {
                     new MenuItem("Settings", (sender, args) => ShowSettingsForm()),
                     new MenuItem("-"),
@@ -44,7 +57,13 @@ namespace GLSLWallpapers {
         }
 
         static void ShowSettingsForm() {
-            new SettingsForm().Show();
+            if (settings_form == null) {
+                settings_form = new SettingsForm();
+                settings_form.Show();
+                settings_form.Closing += (sender, args) => settings_form = null;
+            } else {
+                settings_form.Focus();
+            }
         }
 
         void Exit() {
