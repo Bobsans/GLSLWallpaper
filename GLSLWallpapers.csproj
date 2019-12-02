@@ -146,6 +146,7 @@
         <Content Include="data\shaders\voronoi-bubbles\screenshot.png"/>
         <Content Include="data\shaders\voronoi-bubbles\shader.frag"/>
         <Content Include="data\shaders\voronoi-bubbles\thumbnail.png"/>
+        <Content Include="LICENSE.txt"/>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>
