@@ -37,12 +37,12 @@
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c">
-          <HintPath>packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
-          <Private>True</Private>
+            <HintPath>packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
+            <Private>True</Private>
         </Reference>
         <Reference Include="OpenTK, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
-          <HintPath>packages\OpenTK.3.1.0\lib\net20\OpenTK.dll</HintPath>
-          <Private>True</Private>
+            <HintPath>packages\OpenTK.3.1.0\lib\net20\OpenTK.dll</HintPath>
+            <Private>True</Private>
         </Reference>
         <Reference Include="System" />
         <Reference Include="System.Core" />
@@ -59,18 +59,19 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Components\ShaderList.cs">
-          <SubType>UserControl</SubType>
+            <SubType>UserControl</SubType>
         </Compile>
         <Compile Include="Components\ShaderList.Designer.cs">
-          <DependentUpon>ShaderList.cs</DependentUpon>
+            <DependentUpon>ShaderList.cs</DependentUpon>
         </Compile>
         <Compile Include="Components\ShaderListItem.cs">
-          <SubType>UserControl</SubType>
+            <SubType>UserControl</SubType>
         </Compile>
         <Compile Include="Components\ShaderListItem.Designer.cs">
-          <DependentUpon>ShaderListItem.cs</DependentUpon>
+            <DependentUpon>ShaderListItem.cs</DependentUpon>
         </Compile>
         <Compile Include="Config.cs" />
+        <Compile Include="Display\Attribute.cs" />
         <Compile Include="Display\DisplayWindow.cs" />
         <Compile Include="Display\Shader.cs" />
         <Compile Include="Display\ShaderProgram.cs" />
@@ -96,36 +97,57 @@
         <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
-      <EmbeddedResource Include="Components\ShaderList.resx">
-        <DependentUpon>ShaderList.cs</DependentUpon>
-      </EmbeddedResource>
-      <EmbeddedResource Include="Components\ShaderListItem.resx">
-        <DependentUpon>ShaderListItem.cs</DependentUpon>
-      </EmbeddedResource>
-      <EmbeddedResource Include="SettingsForm.resx">
-        <DependentUpon>SettingsForm.cs</DependentUpon>
-      </EmbeddedResource>
+        <EmbeddedResource Include="Components\ShaderList.resx">
+            <DependentUpon>ShaderList.cs</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Components\ShaderListItem.resx">
+            <DependentUpon>ShaderListItem.cs</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Include="SettingsForm.resx">
+            <DependentUpon>SettingsForm.cs</DependentUpon>
+        </EmbeddedResource>
     </ItemGroup>
     <ItemGroup>
-      <Content Include=".gitignore" />
-      <Content Include="data\shaders\colorful-voronoi\info.ini" />
-      <Content Include="data\shaders\colorful-voronoi\screenshot.png" />
-      <Content Include="data\shaders\colorful-voronoi\shader.glsl" />
-      <Content Include="data\shaders\colorful-voronoi\thumbnail.png" />
-      <Content Include="data\shaders\donut\info.ini" />
-      <Content Include="data\shaders\donut\screenshot.png" />
-      <Content Include="data\shaders\donut\shader.glsl" />
-      <Content Include="data\shaders\donut\thumbnail.png" />
-      <Content Include="data\shaders\lightning\info.ini" />
-      <Content Include="data\shaders\lightning\screenshot.png" />
-      <Content Include="data\shaders\lightning\shader.glsl" />
-      <Content Include="data\shaders\lightning\thumbnail.png" />
-      <Content Include="data\shaders\voronoi-bubbles\info.ini" />
-      <Content Include="data\shaders\voronoi-bubbles\screenshot.png" />
-      <Content Include="data\shaders\voronoi-bubbles\shader.glsl" />
-      <Content Include="data\shaders\voronoi-bubbles\thumbnail.png" />
-      <Content Include="icon.ico" />
-      <Content Include="collect_release.py" />
+        <Content Include=".editorconfig" />
+        <Content Include=".gitignore" />
+        <Content Include="data\shaders\braincells\info.ini" />
+        <Content Include="data\shaders\braincells\screenshot.png" />
+        <Content Include="data\shaders\braincells\shader.frag" />
+        <Content Include="data\shaders\braincells\thumbnail.png" />
+        <Content Include="data\shaders\colorful-madness\info.ini" />
+        <Content Include="data\shaders\colorful-madness\screenshot.png" />
+        <Content Include="data\shaders\colorful-madness\shader.frag" />
+        <Content Include="data\shaders\colorful-madness\thumbnail.png" />
+        <Content Include="data\shaders\colorful-voronoi\info.ini" />
+        <Content Include="data\shaders\colorful-voronoi\screenshot.png" />
+        <Content Include="data\shaders\colorful-voronoi\shader.frag" />
+        <Content Include="data\shaders\colorful-voronoi\thumbnail.png" />
+        <Content Include="data\shaders\donut\info.ini" />
+        <Content Include="data\shaders\donut\screenshot.png" />
+        <Content Include="data\shaders\donut\shader.frag" />
+        <Content Include="data\shaders\donut\thumbnail.png" />
+        <Content Include="data\shaders\horse-world\info.ini" />
+        <Content Include="data\shaders\horse-world\screenshot.png" />
+        <Content Include="data\shaders\horse-world\shader.frag" />
+        <Content Include="data\shaders\horse-world\thumbnail.png" />
+        <Content Include="data\shaders\lightning\info.ini" />
+        <Content Include="data\shaders\lightning\screenshot.png" />
+        <Content Include="data\shaders\lightning\shader.frag" />
+        <Content Include="data\shaders\lightning\thumbnail.png" />
+        <Content Include="data\shaders\pasta-wires\info.ini" />
+        <Content Include="data\shaders\pasta-wires\screenshot.png" />
+        <Content Include="data\shaders\pasta-wires\shader.frag" />
+        <Content Include="data\shaders\pasta-wires\thumbnail.png" />
+        <Content Include="data\shaders\v-drop-tunnel\info.ini" />
+        <Content Include="data\shaders\v-drop-tunnel\screenshot.png" />
+        <Content Include="data\shaders\v-drop-tunnel\shader.frag" />
+        <Content Include="data\shaders\v-drop-tunnel\thumbnail.png" />
+        <Content Include="data\shaders\voronoi-bubbles\info.ini" />
+        <Content Include="data\shaders\voronoi-bubbles\screenshot.png" />
+        <Content Include="data\shaders\voronoi-bubbles\shader.frag" />
+        <Content Include="data\shaders\voronoi-bubbles\thumbnail.png" />
+        <Content Include="icon.ico" />
+        <Content Include="collect_release.py" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

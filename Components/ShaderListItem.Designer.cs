@@ -2,12 +2,12 @@ using System.ComponentModel;
 
 namespace GLSLWallpapers.Components {
     partial class ShaderListItem {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -35,20 +35,20 @@ namespace GLSLWallpapers.Components {
             this.LabelFileValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxPreview)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // ButtonApply
-            // 
+            //
             this.ButtonApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonApply.Location = new System.Drawing.Point(427, 51);
+            this.ButtonApply.Location = new System.Drawing.Point(427, 57);
             this.ButtonApply.Name = "ButtonApply";
-            this.ButtonApply.Size = new System.Drawing.Size(73, 29);
+            this.ButtonApply.Size = new System.Drawing.Size(73, 24);
             this.ButtonApply.TabIndex = 0;
             this.ButtonApply.Text = "Apply";
             this.ButtonApply.UseVisualStyleBackColor = true;
             this.ButtonApply.Click += new System.EventHandler(this.ButtonApply_Click);
-            // 
+            //
             // PictureBoxPreview
-            // 
+            //
             this.PictureBoxPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PictureBoxPreview.ErrorImage = null;
             this.PictureBoxPreview.InitialImage = null;
@@ -57,59 +57,54 @@ namespace GLSLWallpapers.Components {
             this.PictureBoxPreview.Size = new System.Drawing.Size(142, 80);
             this.PictureBoxPreview.TabIndex = 1;
             this.PictureBoxPreview.TabStop = false;
-            // 
+            //
             // LabelTitle
-            // 
-            this.LabelTitle.AutoSize = true;
+            //
             this.LabelTitle.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.LabelTitle.Location = new System.Drawing.Point(148, 0);
             this.LabelTitle.Name = "LabelTitle";
-            this.LabelTitle.Size = new System.Drawing.Size(40, 20);
+            this.LabelTitle.Size = new System.Drawing.Size(352, 23);
             this.LabelTitle.TabIndex = 2;
             this.LabelTitle.Text = "Title";
-            // 
+            //
             // LabelAuthor
-            // 
-            this.LabelAuthor.AutoSize = true;
+            //
             this.LabelAuthor.ForeColor = System.Drawing.Color.Gray;
-            this.LabelAuthor.Location = new System.Drawing.Point(148, 20);
+            this.LabelAuthor.Location = new System.Drawing.Point(148, 23);
             this.LabelAuthor.Name = "LabelAuthor";
-            this.LabelAuthor.Size = new System.Drawing.Size(47, 15);
+            this.LabelAuthor.Size = new System.Drawing.Size(51, 15);
             this.LabelAuthor.TabIndex = 3;
             this.LabelAuthor.Text = "Author:";
-            // 
+            //
             // LabelFile
-            // 
-            this.LabelFile.AutoSize = true;
+            //
             this.LabelFile.ForeColor = System.Drawing.Color.Gray;
-            this.LabelFile.Location = new System.Drawing.Point(148, 35);
+            this.LabelFile.Location = new System.Drawing.Point(148, 38);
             this.LabelFile.Name = "LabelFile";
-            this.LabelFile.Size = new System.Drawing.Size(28, 15);
+            this.LabelFile.Size = new System.Drawing.Size(51, 15);
             this.LabelFile.TabIndex = 3;
             this.LabelFile.Text = "File:";
-            // 
+            //
             // LabelAuthorValue
-            // 
-            this.LabelAuthorValue.AutoSize = true;
+            //
             this.LabelAuthorValue.ForeColor = System.Drawing.Color.Gray;
-            this.LabelAuthorValue.Location = new System.Drawing.Point(194, 20);
+            this.LabelAuthorValue.Location = new System.Drawing.Point(194, 23);
             this.LabelAuthorValue.Name = "LabelAuthorValue";
-            this.LabelAuthorValue.Size = new System.Drawing.Size(42, 15);
+            this.LabelAuthorValue.Size = new System.Drawing.Size(227, 15);
             this.LabelAuthorValue.TabIndex = 3;
             this.LabelAuthorValue.Text = "author";
-            // 
+            //
             // LabelFileValue
-            // 
-            this.LabelFileValue.AutoSize = true;
+            //
             this.LabelFileValue.ForeColor = System.Drawing.Color.Gray;
-            this.LabelFileValue.Location = new System.Drawing.Point(194, 35);
+            this.LabelFileValue.Location = new System.Drawing.Point(194, 38);
             this.LabelFileValue.Name = "LabelFileValue";
-            this.LabelFileValue.Size = new System.Drawing.Size(42, 15);
+            this.LabelFileValue.Size = new System.Drawing.Size(227, 15);
             this.LabelFileValue.TabIndex = 3;
             this.LabelFileValue.Text = "file.ext";
-            // 
+            //
             // ShaderListItem
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.LabelFileValue);
@@ -124,7 +119,6 @@ namespace GLSLWallpapers.Components {
             this.Size = new System.Drawing.Size(500, 84);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxPreview)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
         }
 
         #endregion

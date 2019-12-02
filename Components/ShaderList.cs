@@ -4,18 +4,27 @@ using GLSLWallpapers.Helpers;
 
 namespace GLSLWallpapers.Components {
     public partial class ShaderList : UserControl {
-        public event EventHandler<ShaderInfo> ApplyButtonCLick;
-
         public int Count => FlowListBoxPanel.Controls.Count;
+
+        protected override CreateParams CreateParams {
+            get {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
+        public event EventHandler<ShaderInfo> ApplyButtonCLick;
 
         public ShaderList() {
             InitializeComponent();
-            FlowListBoxPanel.AutoScrollPosition = Location;
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
 
         public void Add(ShaderListItem item) {
             item.ApplyButtonCLick += OnItemApplyClick;
             FlowListBoxPanel.Controls.Add(item);
+
             SetupAnchors();
         }
 
@@ -43,7 +52,12 @@ namespace GLSLWallpapers.Components {
                 if (FlowListBoxPanel.Controls[i] is ShaderListItem item) {
                     if (i == 0) {
                         item.Anchor = AnchorStyles.Left | AnchorStyles.Top;
-                        item.Width = FlowListBoxPanel.Width - SystemInformation.VerticalScrollBarWidth - 6;
+
+                        if (FlowListBoxPanel.VerticalScroll.Visible) {
+                            item.Width = FlowListBoxPanel.Width - SystemInformation.VerticalScrollBarWidth - Margin.Horizontal;
+                        } else {
+                            item.Width = FlowListBoxPanel.Width - Margin.Horizontal;
+                        }
                     } else {
                         item.Anchor = AnchorStyles.Left | AnchorStyles.Right;
                     }

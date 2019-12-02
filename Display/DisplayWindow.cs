@@ -8,51 +8,52 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
+using ButtonState = OpenTK.Input.ButtonState;
 
 namespace GLSLWallpapers.Display {
     public class DisplayWindow : GameWindow {
+        static readonly ConcurrentQueue<ShaderInfo> queue = new ConcurrentQueue<ShaderInfo>();
+        float time;
+        int vbo;
+
         ShaderProgram Program { get; set; }
 
-        Uniform UniformTime { get; } = new Uniform("time");
+        Attribute AttributePosition { get; } = new Attribute("position");
         Uniform UniformResolution { get; } = new Uniform("resolution");
+        Uniform UniformTime { get; } = new Uniform("time");
         Uniform UniformMouse { get; } = new Uniform("mouse");
-
-//        int vbo;
-
-        float Time { get; set; }
-
-        static readonly ConcurrentQueue<string> queue = new ConcurrentQueue<string>();
 
         public static DisplayWindow Instance { get; private set; }
 
         public DisplayWindow() : base(1, 1, GraphicsMode.Default, Reference.NAME, GameWindowFlags.FixedWindow) {
-            WindowBorder = WindowBorder.Hidden;
-            Instance = this;
-
             Win32.SetWindowAsDesktopChild(WindowInfo.Handle);
 
-            Size = new Size(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height);
+            WindowBorder = WindowBorder.Hidden;
             Location = new Point(0, 0);
+            Size = new Size(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height);
 
             Config.FramesPerSecondChange += (sender, i) => TargetRenderFrequency = i;
             Config.UpdatesPerSecondChange += (sender, i) => TargetUpdateFrequency = i;
-            Config.ShaderChange += (sender, s) => queue.Enqueue(ShaderRegistry.Shaders[s].Code);
+            Config.ShaderChange += (sender, s) => queue.Enqueue(ShaderRegistry.Get(s));
+
+            Instance = this;
         }
 
         protected override void OnLoad(EventArgs e) {
-            base.OnLoad(e);
-
             GL.ClearColor(Color.Black);
 
-//            InitVbo();
+            InitVbo();
 
-            SetShaders(null, ShaderRegistry.Shaders.ContainsKey(Config.ShaderName) ? ShaderRegistry.Shaders[Config.ShaderName].Code : null);
-            Visible = true;
+            ShaderInfo shader = Config.ShaderName != null ? ShaderRegistry.Get(Config.ShaderName) : ShaderRegistry.First();
+            SetShaders(shader?.VertexCode, shader?.FragmentCode);
+
+            base.OnLoad(e);
         }
 
         protected override void OnUnload(EventArgs e) {
-//            FreeVbo();
+            FreeVbo();
             Program?.Dispose();
+            Win32.RefreshWallpaper();
 
             base.OnUnload(e);
 
@@ -76,13 +77,15 @@ namespace GLSLWallpapers.Display {
                 Program?.Dispose();
                 InitShader(shaders);
             } else {
-                MessageBox.Show($"Invalid sahder program", "Error");
+                MessageBox.Show("Invalid sahder program", "Error");
             }
         }
 
         void InitShader(params Shader[] shaders) {
             Program = new ShaderProgram(shaders);
             CheckOpenGLerror();
+
+            AttributePosition.GetLocation(Program);
 
             UniformTime.GetLocation(Program);
             UniformResolution.GetLocation(Program);
@@ -92,55 +95,54 @@ namespace GLSLWallpapers.Display {
             CheckOpenGLerror();
         }
 
-//        void InitVbo() {
-//            vbo = GL.GenBuffer();
-//
-//            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
-//
-//            Vector2[] buffer = {new Vector2(-1, -1), new Vector2(-1, 1), new Vector2(1, 1), new Vector2(1, -1)};
-//
-//            GL.BufferData(BufferTarget.ArrayBuffer, Vector2.SizeInBytes * buffer.Length, buffer, BufferUsageHint.StaticDraw);
-//            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-//        }
-//
-//        void FreeVbo() {
-//            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-//            GL.DeleteBuffer(vbo);
-//        }
+        void InitVbo() {
+            vbo = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
+
+            GL.BufferData(BufferTarget.ArrayBuffer, 4 * Vector2.SizeInBytes, new[] {
+                new Vector2(-1.0f, -1.0f),
+                new Vector2(-1.0f, 1.0f),
+                new Vector2(1.0f, 1.0f),
+                new Vector2(1.0f, -1.0f)
+            }, BufferUsageHint.StaticDraw);
+        }
+
+        void FreeVbo() {
+            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+            GL.DeleteBuffer(vbo);
+        }
 
         protected override void OnUpdateFrame(FrameEventArgs e) {
             base.OnUpdateFrame(e);
 
-            queue.TryDequeue(out string code);
-            if (code != null) {
+            queue.TryDequeue(out ShaderInfo info);
+            if (info != null) {
                 try {
-                    SetShaders(null, code);
+                    SetShaders(info.VertexCode, info.FragmentCode);
                 } catch (Exception ex) {
-                    Logger.Error($"Could not apply shader programm. Maybe it invalid. Exception: {ex}");
+                    Logger.Error($"Could not apply shader program. Maybe it invalid. Exception: {ex}");
                 }
             }
 
             UniformResolution.Set2F(ClientRectangle.Width, ClientRectangle.Height);
 
-            Time += (float)e.Time * ((float)Config.TimeScale / 1000);
-            UniformTime.Set1F(Time);
+            time += (float)e.Time * ((float)Config.TimeScale / 1000);
+            UniformTime.Set1F(time);
 
             if (Config.MouseInteract) {
                 MouseState mouse = Mouse.GetState();
-                UniformMouse.Set2F(mouse.X, mouse.Y);
+                UniformMouse.Set4F(mouse.X, mouse.Y, mouse.LeftButton == ButtonState.Pressed ? 1 : 0, mouse.RightButton == ButtonState.Pressed ? 1 : 0);
             }
         }
 
         protected override void OnRenderFrame(FrameEventArgs e) {
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            GL.Color3(1.0f, 1.0f, 1.0f);
-            GL.Begin(PrimitiveType.Quads);
-            GL.Vertex2(-1.0, -1.0);
-            GL.Vertex2(1.0, -1.0);
-            GL.Vertex2(1.0, 1.0);
-            GL.Vertex2(-1.0, 1.0);
-            GL.End();
+            GL.EnableVertexAttribArray(0);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
+            GL.VertexAttribPointer(0, 2, VertexAttribPointerType.Float, false, 0, 0);
+            GL.DrawArrays(PrimitiveType.Quads, 0, 4);
+            GL.DisableVertexAttribArray(0);
 
             SwapBuffers();
 

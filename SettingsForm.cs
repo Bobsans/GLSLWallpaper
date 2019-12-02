@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using GLSLWallpapers.Components;
@@ -10,8 +9,10 @@ namespace GLSLWallpapers {
         public SettingsForm() {
             InitializeComponent();
 
-            foreach (KeyValuePair<string, ShaderInfo> pair in ShaderRegistry.Shaders) {
-                ShaderListView.Add(new ShaderListItem(pair.Value));
+            foreach (ShaderInfo info in ShaderRegistry.All()) {
+                ShaderListView.Add(new ShaderListItem(info) {
+                    Selected = Config.ShaderName == info.FileName
+                });
             }
 
             ShaderListView.ApplyButtonCLick += (sender, info) => Config.ShaderName = info.FileName;

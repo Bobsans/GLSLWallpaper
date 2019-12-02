@@ -45,6 +45,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.CheckBoxMouseInteract);
             this.groupBox1.Controls.Add(this.LabelUpdatesPerSecondValue);
             this.groupBox1.Controls.Add(this.LabelFramesPerSecondValue);
@@ -56,17 +57,21 @@
             this.groupBox1.Controls.Add(this.TrackBarFramesPerSecond);
             this.groupBox1.Controls.Add(this.TrackBarTimeScale);
             this.groupBox1.Location = new System.Drawing.Point(12, 3);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(542, 522);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox1.Size = new System.Drawing.Size(546, 522);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
             // 
             // CheckBoxMouseInteract
             // 
+            this.CheckBoxMouseInteract.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.CheckBoxMouseInteract.Location = new System.Drawing.Point(124, 132);
+            this.CheckBoxMouseInteract.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.CheckBoxMouseInteract.Name = "CheckBoxMouseInteract";
-            this.CheckBoxMouseInteract.Size = new System.Drawing.Size(412, 24);
+            this.CheckBoxMouseInteract.Size = new System.Drawing.Size(416, 24);
             this.CheckBoxMouseInteract.TabIndex = 4;
             this.CheckBoxMouseInteract.Text = "Mouse interact";
             this.CheckBoxMouseInteract.UseVisualStyleBackColor = true;
@@ -75,6 +80,7 @@
             // LabelUpdatesPerSecondValue
             // 
             this.LabelUpdatesPerSecondValue.Location = new System.Drawing.Point(6, 110);
+            this.LabelUpdatesPerSecondValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabelUpdatesPerSecondValue.Name = "LabelUpdatesPerSecondValue";
             this.LabelUpdatesPerSecondValue.Size = new System.Drawing.Size(120, 18);
             this.LabelUpdatesPerSecondValue.TabIndex = 3;
@@ -84,6 +90,7 @@
             // LabelFramesPerSecondValue
             // 
             this.LabelFramesPerSecondValue.Location = new System.Drawing.Point(6, 73);
+            this.LabelFramesPerSecondValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabelFramesPerSecondValue.Name = "LabelFramesPerSecondValue";
             this.LabelFramesPerSecondValue.Size = new System.Drawing.Size(120, 18);
             this.LabelFramesPerSecondValue.TabIndex = 3;
@@ -93,6 +100,7 @@
             // LabelTimeScaleValue
             // 
             this.LabelTimeScaleValue.Location = new System.Drawing.Point(6, 35);
+            this.LabelTimeScaleValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabelTimeScaleValue.Name = "LabelTimeScaleValue";
             this.LabelTimeScaleValue.Size = new System.Drawing.Size(120, 18);
             this.LabelTimeScaleValue.TabIndex = 3;
@@ -102,6 +110,7 @@
             // LabelUpdatesPerSecond
             // 
             this.LabelUpdatesPerSecond.Location = new System.Drawing.Point(6, 93);
+            this.LabelUpdatesPerSecond.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabelUpdatesPerSecond.Name = "LabelUpdatesPerSecond";
             this.LabelUpdatesPerSecond.Size = new System.Drawing.Size(120, 22);
             this.LabelUpdatesPerSecond.TabIndex = 2;
@@ -111,6 +120,7 @@
             // LabelFramesPerSecond
             // 
             this.LabelFramesPerSecond.Location = new System.Drawing.Point(6, 57);
+            this.LabelFramesPerSecond.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabelFramesPerSecond.Name = "LabelFramesPerSecond";
             this.LabelFramesPerSecond.Size = new System.Drawing.Size(120, 22);
             this.LabelFramesPerSecond.TabIndex = 2;
@@ -120,6 +130,7 @@
             // TimeScaleLabel
             // 
             this.TimeScaleLabel.Location = new System.Drawing.Point(6, 18);
+            this.TimeScaleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TimeScaleLabel.Name = "TimeScaleLabel";
             this.TimeScaleLabel.Size = new System.Drawing.Size(120, 22);
             this.TimeScaleLabel.TabIndex = 2;
@@ -128,12 +139,14 @@
             // 
             // TrackBarUpdatesPerSecond
             // 
+            this.TrackBarUpdatesPerSecond.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.TrackBarUpdatesPerSecond.LargeChange = 10;
             this.TrackBarUpdatesPerSecond.Location = new System.Drawing.Point(124, 93);
+            this.TrackBarUpdatesPerSecond.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.TrackBarUpdatesPerSecond.Maximum = 120;
             this.TrackBarUpdatesPerSecond.Minimum = 1;
             this.TrackBarUpdatesPerSecond.Name = "TrackBarUpdatesPerSecond";
-            this.TrackBarUpdatesPerSecond.Size = new System.Drawing.Size(412, 45);
+            this.TrackBarUpdatesPerSecond.Size = new System.Drawing.Size(416, 45);
             this.TrackBarUpdatesPerSecond.TabIndex = 1;
             this.TrackBarUpdatesPerSecond.TickFrequency = 10;
             this.TrackBarUpdatesPerSecond.Value = 1;
@@ -141,12 +154,14 @@
             // 
             // TrackBarFramesPerSecond
             // 
+            this.TrackBarFramesPerSecond.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.TrackBarFramesPerSecond.LargeChange = 10;
             this.TrackBarFramesPerSecond.Location = new System.Drawing.Point(124, 57);
+            this.TrackBarFramesPerSecond.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.TrackBarFramesPerSecond.Maximum = 120;
             this.TrackBarFramesPerSecond.Minimum = 1;
             this.TrackBarFramesPerSecond.Name = "TrackBarFramesPerSecond";
-            this.TrackBarFramesPerSecond.Size = new System.Drawing.Size(412, 45);
+            this.TrackBarFramesPerSecond.Size = new System.Drawing.Size(416, 45);
             this.TrackBarFramesPerSecond.TabIndex = 1;
             this.TrackBarFramesPerSecond.TickFrequency = 10;
             this.TrackBarFramesPerSecond.Value = 1;
@@ -154,12 +169,14 @@
             // 
             // TrackBarTimeScale
             // 
+            this.TrackBarTimeScale.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.TrackBarTimeScale.LargeChange = 10;
             this.TrackBarTimeScale.Location = new System.Drawing.Point(124, 18);
+            this.TrackBarTimeScale.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.TrackBarTimeScale.Maximum = 2000;
             this.TrackBarTimeScale.Minimum = 1;
             this.TrackBarTimeScale.Name = "TrackBarTimeScale";
-            this.TrackBarTimeScale.Size = new System.Drawing.Size(412, 45);
+            this.TrackBarTimeScale.Size = new System.Drawing.Size(416, 45);
             this.TrackBarTimeScale.TabIndex = 1;
             this.TrackBarTimeScale.TickFrequency = 50;
             this.TrackBarTimeScale.Value = 1;
@@ -167,12 +184,13 @@
             // 
             // ShaderListView
             // 
-            this.ShaderListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+            this.ShaderListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Right)));
             this.ShaderListView.BackColor = System.Drawing.SystemColors.Window;
             this.ShaderListView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ShaderListView.Location = new System.Drawing.Point(561, 12);
+            this.ShaderListView.Location = new System.Drawing.Point(566, 12);
+            this.ShaderListView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ShaderListView.Name = "ShaderListView";
-            this.ShaderListView.Size = new System.Drawing.Size(434, 513);
+            this.ShaderListView.Size = new System.Drawing.Size(429, 513);
             this.ShaderListView.TabIndex = 1;
             // 
             // SettingsForm
@@ -182,7 +200,9 @@
             this.ClientSize = new System.Drawing.Size(1008, 537);
             this.Controls.Add(this.ShaderListView);
             this.Controls.Add(this.groupBox1);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1024, 576);

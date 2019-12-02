@@ -4,12 +4,12 @@ using System.Windows.Forms;
 
 namespace GLSLWallpapers.Components {
     partial class ShaderList {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -30,9 +30,9 @@ namespace GLSLWallpapers.Components {
         private void InitializeComponent() {
             this.FlowListBoxPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
-            // 
+            //
             // FlowListBoxPanel
-            // 
+            //
             this.FlowListBoxPanel.AutoScroll = true;
             this.FlowListBoxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FlowListBoxPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -43,9 +43,9 @@ namespace GLSLWallpapers.Components {
             this.FlowListBoxPanel.TabIndex = 0;
             this.FlowListBoxPanel.WrapContents = false;
             this.FlowListBoxPanel.Resize += new System.EventHandler(this.FlowListBoxPanel_Resize);
-            // 
+            //
             // ShaderList
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;

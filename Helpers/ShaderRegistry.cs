@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using IniParser;
 using IniParser.Model;
 
 namespace GLSLWallpapers.Helpers {
     public static class ShaderRegistry {
-        public static Dictionary<string, ShaderInfo> Shaders { get; } = new Dictionary<string, ShaderInfo>();
+        static readonly Dictionary<string, ShaderInfo> shaders = new Dictionary<string, ShaderInfo>();
 
         public static void Load() {
             if (!Directory.Exists(Reference.SHADERS_DIRECTORY)) {
@@ -16,8 +17,24 @@ namespace GLSLWallpapers.Helpers {
 
             foreach (string path in Directory.GetFiles(Reference.SHADERS_DIRECTORY, $"*.{Reference.SHADER_FILE_EXTENSION}")) {
                 ShaderInfo info = ShaderInfo.FromFile(path);
-                Shaders.Add(info.FileName, info);
+                shaders.Add(info.FileName, info);
             }
+        }
+
+        public static bool Has(string name) {
+            return shaders.ContainsKey(name);
+        }
+
+        public static ShaderInfo Get(string name) {
+            return shaders.ContainsKey(name) ? shaders[name] : null;
+        }
+
+        public static ShaderInfo First() {
+            return shaders.Count > 0 ? shaders.First().Value : null;
+        }
+
+        public static IEnumerable<ShaderInfo> All() {
+            return shaders.Values.AsEnumerable();
         }
     }
 
@@ -26,7 +43,8 @@ namespace GLSLWallpapers.Helpers {
         public string FileName => Path.GetFileNameWithoutExtension(FilePath);
         public string Name { get; private set; }
         public string Author { get; private set; }
-        public string Code { get; private set; }
+        public string VertexCode { get; private set; }
+        public string FragmentCode { get; private set; }
         public Image Image { get; private set; }
 
         public static ShaderInfo FromFile(string path) {
@@ -47,9 +65,13 @@ namespace GLSLWallpapers.Helpers {
                                     info.Author = packInfo.Keys.ContainsKey("Author") ? packInfo.Keys.GetKeyData("Author").Value : "Unknown";
                                 }
                             }
-                        } else if (entry.Name == "shader.glsl") {
+                        } else if (entry.Name == "shader.vert") {
                             using (StreamReader reader = new StreamReader(entryStream)) {
-                                info.Code = reader.ReadToEnd();
+                                info.VertexCode = reader.ReadToEnd();
+                            }
+                        } else if (entry.Name == "shader.frag") {
+                            using (StreamReader reader = new StreamReader(entryStream)) {
+                                info.FragmentCode = reader.ReadToEnd();
                             }
                         } else if (entry.Name == "thumbnail.png") {
                             info.Image = Image.FromStream(entryStream);

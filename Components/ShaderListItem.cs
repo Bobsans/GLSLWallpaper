@@ -5,17 +5,16 @@ using GLSLWallpapers.Helpers;
 
 namespace GLSLWallpapers.Components {
     public partial class ShaderListItem : UserControl {
-        public event EventHandler<ShaderInfo> ApplyButtonCLick;
-
         public ShaderInfo ShaderInfo { get; }
-
         public bool Selected { get; set; }
+
+        public event EventHandler<ShaderInfo> ApplyButtonCLick;
 
         public ShaderListItem(ShaderInfo info) {
             InitializeComponent();
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 
             ShaderInfo = info;
-
             LabelTitle.Text = info.Name;
             LabelAuthorValue.Text = info.Author;
             LabelFileValue.Text = info.FileName;
@@ -25,11 +24,12 @@ namespace GLSLWallpapers.Components {
         }
 
         protected override void OnPaint(PaintEventArgs e) {
-            if (Selected) {
-                e.Graphics.FillRectangle(Brushes.Bisque, Bounds);
-            }
-
             base.OnPaint(e);
+
+//            if (Selected) {
+//                e.Graphics.FillRectangle(Brushes.Bisque, 0, 0, Width, Height);
+//            }
+
             e.Graphics.DrawLine(Pens.Lavender, 0, Height - 1, Width - 1, Height - 1);
         }
 

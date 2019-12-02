@@ -3,16 +3,10 @@ using GLSLWallpapers.Helpers;
 
 namespace GLSLWallpapers {
     public static class Config {
-        public static event EventHandler<int> TimeScaleChange;
-        public static event EventHandler<int> FramesPerSecondChange;
-        public static event EventHandler<int> UpdatesPerSecondChange;
-        public static event EventHandler<bool> MouseInteractChange;
-        public static event EventHandler<string> ShaderChange;
-
         static int _timeScale = 1000; /* 1..2000 */
-        static int _framesPerSecond = 60; /* 1..120 */
-        static int _updatesPerSecond = 60; /* 1..120 */
-        static bool _mouseInteract;
+        static int _framesPerSecond = 120; /* 1..120 */
+        static int _updatesPerSecond = 120; /* 1..120 */
+        static bool _mouseInteract = true;
         static string _shaderName;
 
         public static int TimeScale {
@@ -55,20 +49,26 @@ namespace GLSLWallpapers {
             }
         }
 
+        public static event EventHandler<int> TimeScaleChange;
+        public static event EventHandler<int> FramesPerSecondChange;
+        public static event EventHandler<int> UpdatesPerSecondChange;
+        public static event EventHandler<bool> MouseInteractChange;
+        public static event EventHandler<string> ShaderChange;
+
         public static void Load() {
-            TimeScale = Convert.ToInt32(RegistryUtils.Get("TimeScale", TimeScale));
-            FramesPerSecond = Convert.ToInt32(RegistryUtils.Get("FramesPerSecond", FramesPerSecond));
-            UpdatesPerSecond = Convert.ToInt32(RegistryUtils.Get("UpdatesPerSecond", UpdatesPerSecond));
-            MouseInteract = Convert.ToBoolean(RegistryUtils.Get("MouseInteract", MouseInteract));
-            ShaderName = Convert.ToString(RegistryUtils.Get("ShaderName", ShaderName));
+            TimeScale = RegistryUtils.GetConfig("TimeScale", TimeScale);
+            FramesPerSecond = RegistryUtils.GetConfig("FramesPerSecond", FramesPerSecond);
+            UpdatesPerSecond = RegistryUtils.GetConfig("UpdatesPerSecond", UpdatesPerSecond);
+            MouseInteract = RegistryUtils.GetConfig("MouseInteract", MouseInteract);
+            ShaderName = RegistryUtils.GetConfig("ShaderName", ShaderName);
         }
 
         public static void Save() {
-            RegistryUtils.Save("TimeScale", TimeScale);
-            RegistryUtils.Save("FramesPerSecond", FramesPerSecond);
-            RegistryUtils.Save("UpdatesPerSecond", UpdatesPerSecond);
-            RegistryUtils.Save("MouseInteract", MouseInteract);
-            RegistryUtils.Save("ShaderName", ShaderName);
+            RegistryUtils.SetConfig("TimeScale", TimeScale);
+            RegistryUtils.SetConfig("FramesPerSecond", FramesPerSecond);
+            RegistryUtils.SetConfig("UpdatesPerSecond", UpdatesPerSecond);
+            RegistryUtils.SetConfig("MouseInteract", MouseInteract);
+            RegistryUtils.SetConfig("ShaderName", ShaderName);
         }
     }
 }
