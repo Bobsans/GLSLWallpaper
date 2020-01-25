@@ -27,6 +27,9 @@ namespace GLSLWallpapers.Helpers {
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool SystemParametersInfo(uint uiAction, uint uiParam, string pvParam, uint fWinIni);
 
+        [DllImport("user32.dll")]
+        static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
+
         public static void SetWindowAsDesktopChild(IntPtr hwnd) {
             IntPtr progman = FindWindow("Progman", null);
             SendMessageTimeout(progman, 0x052c, UIntPtr.Zero, IntPtr.Zero, SMTO_NORMAL, 1000, out UIntPtr _);
@@ -45,9 +48,55 @@ namespace GLSLWallpapers.Helpers {
         }
 
         public static void RefreshWallpaper() {
-            SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, RegistryUtils.GetCurrentWallpapaer(), SPIF_UPDATEINIFILE);
+            SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, RegistryUtils.GetCurrentWallpaper(), SPIF_UPDATEINIFILE);
         }
 
         delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct WindowCompositionAttributeData {
+            public WindowCompositionAttribute Attribute;
+            public IntPtr Data;
+            public int SizeOfData;
+        }
+
+        enum WindowCompositionAttribute {
+            WCA_ACCENT_POLICY = 19
+        }
+
+        enum AccentState {
+            ACCENT_DISABLED = 0,
+            ACCENT_ENABLE_GRADIENT = 1,
+            ACCENT_ENABLE_TRANSPARENTGRADIENT = 2,
+            ACCENT_ENABLE_BLURBEHIND = 3,
+            ACCENT_INVALID_STATE = 4
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct AccentPolicy {
+            public AccentState AccentState;
+            public readonly int AccentFlags;
+            public readonly int GradientColor;
+            public readonly int AnimationId;
+        }
+
+        public static void EnableWindowBlur(IntPtr hwnd) {
+            AccentPolicy accent = new AccentPolicy();
+            int accentStructSize = Marshal.SizeOf(accent);
+            accent.AccentState = AccentState.ACCENT_ENABLE_BLURBEHIND;
+
+            IntPtr accentPtr = Marshal.AllocHGlobal(accentStructSize);
+            Marshal.StructureToPtr(accent, accentPtr, false);
+
+            WindowCompositionAttributeData data = new WindowCompositionAttributeData {
+                Attribute = WindowCompositionAttribute.WCA_ACCENT_POLICY,
+                SizeOfData = accentStructSize,
+                Data = accentPtr
+            };
+
+            SetWindowCompositionAttribute(hwnd, ref data);
+
+            Marshal.FreeHGlobal(accentPtr);
+        }
     }
 }

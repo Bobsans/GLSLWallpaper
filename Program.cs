@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
@@ -9,21 +9,28 @@ using GLSLWallpapers.Helpers;
 
 namespace GLSLWallpapers {
     static class Program {
+        static readonly Mutex mutex = new Mutex(true, Reference.GUID);
+
         [STAThread]
         static void Main(string[] args) {
-            Logger.FilePath = "./latest.log";
+            if (mutex.WaitOne(TimeSpan.Zero, true)) {
+                Logger.FilePath = "./latest.log";
 
-            ShaderRegistry.Load();
-            Config.Load();
+                ShaderRegistry.Load();
+                Config.Load();
 
-            ProcessArguments(args);
+                ProcessArguments(args);
 
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.EnableVisualStyles();
 
-            Application.Run(new Context());
+                Application.Run(new Context());
 
-            Config.Save();
+                Config.Save();
+                mutex.ReleaseMutex();
+            }
+
+            mutex.ReleaseMutex();
         }
 
         static void ProcessArguments(IReadOnlyList<string> args) {
@@ -36,7 +43,6 @@ namespace GLSLWallpapers {
     }
 
     class Context : ApplicationContext {
-        static SettingsForm settings_form;
         readonly NotifyIcon icon;
 
         public Context() {
@@ -57,13 +63,7 @@ namespace GLSLWallpapers {
         }
 
         static void ShowSettingsForm() {
-            if (settings_form == null) {
-                settings_form = new SettingsForm();
-                settings_form.Show();
-                settings_form.Closing += (sender, args) => settings_form = null;
-            } else {
-                settings_form.Focus();
-            }
+            App.Run();
         }
 
         void Exit() {

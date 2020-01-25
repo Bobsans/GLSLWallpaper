@@ -9,11 +9,12 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using ButtonState = OpenTK.Input.ButtonState;
+using SystemCursor = System.Windows.Forms.Cursor;
 
 namespace GLSLWallpapers.Display {
     public class DisplayWindow : GameWindow {
         static readonly ConcurrentQueue<ShaderInfo> queue = new ConcurrentQueue<ShaderInfo>();
-        float time;
+        double time;
         int vbo;
 
         ShaderProgram Program { get; set; }
@@ -71,7 +72,7 @@ namespace GLSLWallpapers.Display {
                 new Shader(ShaderType.FragmentShader, fragment ?? Shader.DEFAULT_FRAGMENT_SHADER)
             };
 
-            CheckOpenGLerror();
+            CheckOpenGLError();
 
             if (shaders.All(shader => shader.Compiled)) {
                 Program?.Dispose();
@@ -83,7 +84,7 @@ namespace GLSLWallpapers.Display {
 
         void InitShader(params Shader[] shaders) {
             Program = new ShaderProgram(shaders);
-            CheckOpenGLerror();
+            CheckOpenGLError();
 
             AttributePosition.GetLocation(Program);
 
@@ -92,7 +93,7 @@ namespace GLSLWallpapers.Display {
             UniformMouse.GetLocation(Program);
 
             Program.Use();
-            CheckOpenGLerror();
+            CheckOpenGLError();
         }
 
         void InitVbo() {
@@ -126,12 +127,12 @@ namespace GLSLWallpapers.Display {
 
             UniformResolution.Set2F(ClientRectangle.Width, ClientRectangle.Height);
 
-            time += (float)e.Time * ((float)Config.TimeScale / 1000);
-            UniformTime.Set1F(time);
+            time += e.Time * Config.TimeScale;
+            UniformTime.Set1F((float)time);
 
             if (Config.MouseInteract) {
                 MouseState mouse = Mouse.GetState();
-                UniformMouse.Set4F(mouse.X, mouse.Y, mouse.LeftButton == ButtonState.Pressed ? 1 : 0, mouse.RightButton == ButtonState.Pressed ? 1 : 0);
+                UniformMouse.Set4F(SystemCursor.Position.X, SystemCursor.Position.Y, mouse.LeftButton == ButtonState.Pressed ? 1 : 0, mouse.RightButton == ButtonState.Pressed ? 1 : 0);
             }
         }
 
@@ -149,7 +150,7 @@ namespace GLSLWallpapers.Display {
             base.OnRenderFrame(e);
         }
 
-        static void CheckOpenGLerror() {
+        static void CheckOpenGLError() {
             ErrorCode code = GL.GetError();
 
             if (code != ErrorCode.NoError) {

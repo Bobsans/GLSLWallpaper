@@ -1,55 +1,65 @@
 using System;
 using GLSLWallpapers.Helpers;
+using SciterSharp;
 
 namespace GLSLWallpapers {
     public static class Config {
-        static int _timeScale = 1000; /* 1..2000 */
-        static int _framesPerSecond = 120; /* 1..120 */
-        static int _updatesPerSecond = 120; /* 1..120 */
-        static bool _mouseInteract = true;
-        static string _shaderName;
+        static double timeScale = 1; /* 0.01..2 */
+        static int framesPerSecond = 120; /* 1..120 */
+        static int updatesPerSecond = 120; /* 1..120 */
+        static bool mouseInteract = true;
+        static string shaderName;
 
-        public static int TimeScale {
-            get => _timeScale;
+        public static double TimeScale {
+            get => timeScale;
             set {
-                _timeScale = MathUtils.Clamp(value, 1, 2000);
-                TimeScaleChange?.Invoke(null, _timeScale);
+                timeScale = MathUtils.Clamp(value, 0.01, 2);
+                TimeScaleChange?.Invoke(null, timeScale);
             }
         }
 
         public static int FramesPerSecond {
-            get => _framesPerSecond;
+            get => framesPerSecond;
             set {
-                _framesPerSecond = MathUtils.Clamp(value, 1, 120);
-                FramesPerSecondChange?.Invoke(null, _framesPerSecond);
+                framesPerSecond = MathUtils.Clamp(value, 1, 120);
+                FramesPerSecondChange?.Invoke(null, framesPerSecond);
             }
         }
 
         public static int UpdatesPerSecond {
-            get => _updatesPerSecond;
+            get => updatesPerSecond;
             set {
-                _updatesPerSecond = MathUtils.Clamp(value, 1, 120);
-                UpdatesPerSecondChange?.Invoke(null, _updatesPerSecond);
+                updatesPerSecond = MathUtils.Clamp(value, 1, 120);
+                UpdatesPerSecondChange?.Invoke(null, updatesPerSecond);
             }
         }
 
         public static bool MouseInteract {
-            get => _mouseInteract;
+            get => mouseInteract;
             set {
-                _mouseInteract = value;
+                mouseInteract = value;
                 MouseInteractChange?.Invoke(null, value);
             }
         }
 
         public static string ShaderName {
-            get => _shaderName;
+            get => shaderName;
             set {
-                _shaderName = value;
+                shaderName = value;
                 ShaderChange?.Invoke(null, value);
             }
         }
 
-        public static event EventHandler<int> TimeScaleChange;
+        public static SciterValue SciterValue =>
+            new SciterValue {
+                ["FramesPerSecond"] = new SciterValue(FramesPerSecond),
+                ["UpdatesPerSecond"] = new SciterValue(UpdatesPerSecond),
+                ["TimeScale"] = new SciterValue(TimeScale),
+                ["MouseInteract"] = new SciterValue(MouseInteract),
+                ["ShaderName"] = new SciterValue(ShaderName)
+            };
+
+        public static event EventHandler<double> TimeScaleChange;
         public static event EventHandler<int> FramesPerSecondChange;
         public static event EventHandler<int> UpdatesPerSecondChange;
         public static event EventHandler<bool> MouseInteractChange;
@@ -69,6 +79,14 @@ namespace GLSLWallpapers {
             RegistryUtils.SetConfig("UpdatesPerSecond", UpdatesPerSecond);
             RegistryUtils.SetConfig("MouseInteract", MouseInteract);
             RegistryUtils.SetConfig("ShaderName", ShaderName);
+        }
+
+        public static void SetFieldValue<T>(string name, T value) {
+            typeof(Config).GetProperty(name)?.SetValue(null, value);
+        }
+
+        public static T GetFieldValue<T>(string name) {
+            return (T)typeof(Config).GetProperty(name)?.GetValue(null);
         }
     }
 }

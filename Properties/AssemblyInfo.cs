@@ -13,7 +13,7 @@ using GLSLWallpapers;
 
 [assembly: ComVisible(false)]
 
-[assembly: Guid("B1D68E2C-C9B9-43E0-A55D-B1611CE4673B")]
+[assembly: Guid(Reference.GUID)]
 
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

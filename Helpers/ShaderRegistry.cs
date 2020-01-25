@@ -7,16 +7,30 @@ using System.Linq;
 using System.Windows.Forms;
 using IniParser;
 using IniParser.Model;
+using SciterSharp;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace GLSLWallpapers.Helpers {
     public static class ShaderRegistry {
         static readonly Dictionary<string, ShaderInfo> shaders = new Dictionary<string, ShaderInfo>();
+
+        public static SciterValue SciterValue {
+            get {
+                return new SciterValue(shaders.Select(pair => new SciterValue {
+                    ["Name"] = new SciterValue(pair.Value.Name),
+                    ["Author"] = new SciterValue(pair.Value.Author),
+                    ["FileName"] = new SciterValue(pair.Value.FileName),
+                    ["Image"] = new SciterValue(Converters.ImageToBase64Url(pair.Value.Image))
+                }));
+            }
+        }
 
         public static void Load() {
             if (!Directory.Exists(Reference.SHADERS_DIRECTORY)) {
                 Directory.CreateDirectory(Reference.SHADERS_DIRECTORY);
             }
 
+            shaders.Clear();
             foreach (string path in Directory.GetFiles(Reference.SHADERS_DIRECTORY, $"*.{Reference.SHADER_FILE_EXTENSION}")) {
                 ShaderInfo info = ShaderInfo.FromFile(path);
                 shaders.Add(info.FileName, info);
@@ -61,7 +75,7 @@ namespace GLSLWallpapers.Helpers {
                     Config.ShaderName = info.FileName;
 
                     return;
-                } catch(Exception ex) {
+                } catch (Exception ex) {
                     Logger.Error($"Error wallpaper installation: {ex}");
                 }
             }
@@ -88,26 +102,22 @@ namespace GLSLWallpapers.Helpers {
                 ZipArchive file = new ZipArchive(stream, ZipArchiveMode.Read);
 
                 foreach (ZipArchiveEntry entry in file.Entries) {
-                    using (Stream entryStream = entry.Open()) {
-                        if (entry.Name == "info.ini") {
-                            using (StreamReader reader = new StreamReader(entryStream)) {
-                                SectionData packInfo = new StreamIniDataParser().ReadData(reader).Sections.GetSectionData("Info");
-                                if (packInfo != null) {
-                                    info.Name = packInfo.Keys.ContainsKey("Name") ? packInfo.Keys.GetKeyData("Name").Value : "Unnamed";
-                                    info.Author = packInfo.Keys.ContainsKey("Author") ? packInfo.Keys.GetKeyData("Author").Value : "Unknown";
-                                }
-                            }
-                        } else if (entry.Name == "shader.vert") {
-                            using (StreamReader reader = new StreamReader(entryStream)) {
-                                info.VertexCode = reader.ReadToEnd();
-                            }
-                        } else if (entry.Name == "shader.frag") {
-                            using (StreamReader reader = new StreamReader(entryStream)) {
-                                info.FragmentCode = reader.ReadToEnd();
-                            }
-                        } else if (entry.Name == "thumbnail.png") {
-                            info.Image = Image.FromStream(entryStream);
+                    using Stream entryStream = entry.Open();
+                    if (entry.Name == "info.ini") {
+                        using StreamReader reader = new StreamReader(entryStream);
+                        SectionData packInfo = new StreamIniDataParser().ReadData(reader).Sections.GetSectionData("Info");
+                        if (packInfo != null) {
+                            info.Name = packInfo.Keys.ContainsKey("Name") ? packInfo.Keys.GetKeyData("Name").Value : "Unnamed";
+                            info.Author = packInfo.Keys.ContainsKey("Author") ? packInfo.Keys.GetKeyData("Author").Value : "Unknown";
                         }
+                    } else if (entry.Name == "shader.vert") {
+                        using StreamReader reader = new StreamReader(entryStream);
+                        info.VertexCode = reader.ReadToEnd();
+                    } else if (entry.Name == "shader.frag") {
+                        using StreamReader reader = new StreamReader(entryStream);
+                        info.FragmentCode = reader.ReadToEnd();
+                    } else if (entry.Name == "thumbnail.png") {
+                        info.Image = Image.FromStream(entryStream);
                     }
                 }
             }

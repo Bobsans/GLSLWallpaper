@@ -7,10 +7,10 @@ namespace GLSLWallpapers.Helpers {
         public static string FilePath { get; set; }
 
         static void Log(LogLevel level, string value) {
-            string direcory = Path.GetDirectoryName(FilePath);
+            string directory = Path.GetDirectoryName(FilePath);
 
-            if (!Directory.Exists(direcory)) {
-                Directory.CreateDirectory(direcory ?? throw new Exception("Invalid log file path."));
+            if (!Directory.Exists(directory)) {
+                Directory.CreateDirectory(directory ?? throw new Exception("Invalid log file path."));
             }
 
             using (StreamWriter writer = new StreamWriter(FilePath, true, Encoding.UTF8)) {
