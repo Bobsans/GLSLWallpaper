@@ -1,0 +1,41 @@
+<html window-frame="extended" window-blurbehind="light" theme="light">
+<head>
+    <style>
+        @import url(unisex-theme.css);
+        @import url(style.css);
+    </style>
+</head>
+<header>
+    <window-caption role=window-caption>GLSLWallpapers Settings</window-caption>
+    <window-buttons>
+        <window-button role="window-close"></window-button>
+    </window-buttons>
+</header>
+<body>
+    <section.settings>
+        <div.hbox.slider>
+            <label.fixed>Update frequesncy:</label>
+            <slider#upsslider min="1" max="120" value="120" step="1"/>
+            <span><span#upsslidervalue>120</span> ups</span>
+        </div>
+        <div.hbox.slider>
+            <label.fixed>Frame rate:</label>
+            <slider#fpsslider min="1" max="120" value="120" step="1"/>
+            <span><span#fpsslidervalue>120</span> fps</span>
+        </div>
+        <div.hbox.slider>
+            <label.fixed>Time scale:</label>
+            <slider#tsslider min="0.01" max="2" value="1" step="0.01"/>
+            <span>x<span#tsslidervalue>1.0</span></span>
+        </div>
+        <div.hbox>
+            <label.fixed>Mouse interact:</label>
+            <toggle(mouse)#mousetoggle checked/>
+        </div>
+    </section>
+    <section.scroll.shaders>
+        <div#shaderlist></div>
+    </section>
+    <script type="text/tiscript" src="script.tis"></script>
+</body>
+</html>

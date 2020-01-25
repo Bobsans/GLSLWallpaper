@@ -1,0 +1,189 @@
+@const WINDOW-CAPTION-HEIGHT: 2.2em;
+@const WINDOW-BUTTON-WIDTH: 4em;
+@const WINDOW-BUTTON-HEIGHT: @WINDOW-CAPTION-HEIGHT;
+@const BORDER_COLOR: rgba(128, 128, 128, 0.2);
+
+
+html {
+    background: transparent;
+    min-width: 1000dip;
+    min-height: 600dip;
+}
+
+@set v-scrollbar {
+    .prev, .next {
+        display: none;
+    }
+
+    .base, .next-page, .prev-page {
+        background: transparent;
+    }
+
+    .slider {
+        background: rgba(128, 128, 128, 0.5);
+    }
+    .base:disabled {
+        background: rgba(128, 128, 128, 0.1);
+    }
+
+    .slider:hover {
+        background: rgba(128, 128, 128, 0.6);
+    }
+
+    .slider:active {
+        background: rgba(128, 128, 128, 0.6);
+    }
+
+    .base {
+        width: 6dip;
+    }
+
+    .corner {
+        background: transparent;
+    }
+}
+
+html > body {
+    margin: 0;
+    height: *;
+    overflow: hidden;
+}
+
+html > header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    font: system;
+    flow: horizontal;
+    height: @WINDOW-CAPTION-HEIGHT;
+    border-bottom: 1px solid @BORDER_COLOR;
+}
+
+html > header > window-caption {
+    display: block;
+    line-height: @WINDOW-CAPTION-HEIGHT;
+    width: *;
+    padding: 0.1em 0.5em;
+}
+
+html > header > window-buttons {
+    display: block;
+    flow: horizontal;
+    width: max-content;
+    height: 2em;
+}
+
+html > header > window-buttons > window-button {
+    behavior: clickable;
+    display: block;
+    height: @WINDOW-BUTTON-HEIGHT;
+    width: @WINDOW-BUTTON-WIDTH;
+    foreground-size: 10dip;
+    foreground-repeat: no-repeat;
+    foreground-position: 50% 50%;
+    stroke: color(text);
+    stroke-width: 1dip;
+}
+
+html > header > window-buttons > window-button:hover {
+    background: rgba(128, 128, 128, 0.5);
+    transition: background-color(linear, 100ms);
+}
+
+html > header > window-buttons > window-button[role="window-close"] {
+    foreground-image: url(path:M0 0 L9 10 M9 0 L0 9);
+}
+
+html > header > window-buttons > window-button[role="window-close"]:hover {
+    background: rgb(232, 17, 35);
+    stroke: #FFFFFF;
+}
+
+body {
+    flow: horizontal;
+    font: system;
+}
+
+.scroll {
+    vertical-scrollbar: v-scrollbar;
+    overflow-y: scroll;
+    height: *;
+}
+
+section {
+    margin-top: @WINDOW-CAPTION-HEIGHT;
+    padding: 0.5em;
+    width: *;
+    height: *;
+}
+
+section.settings {
+    width: *;
+    padding-right: 0;
+}
+
+section.shaders {
+    width: 35em;
+}
+
+div.hbox.slider > span {
+    width: 4em;
+}
+
+div.hbox label.fixed {
+    width: 10em;
+}
+
+div.hbox.slider > slider {
+    width: *;
+}
+
+div.shader {
+    width: *;
+    flow: horizontal;
+    behavior: radio;
+    border-left: 4dip solid transparent;
+    padding: 1dip;
+}
+
+div.shader:not(:last-child) {
+    padding-bottom: 1dip;
+    border-bottom: 1dip solid @BORDER_COLOR;
+}
+
+div.shader:not(:first-child) {
+    padding-top: 2dip;
+}
+
+div.shader:checked {
+    border-left: 4dip solid red;
+    background: rgba(128, 128, 128, 0.6);
+    transition: blend(quad-in, 200ms, quad-out);
+}
+
+div.shader div.info {
+    width: *;
+    padding: 0 0.8em;
+}
+
+div.shader div.info h2 {
+    width: *;
+    margin: 0 0 0.1em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+div.shader div.info b {
+    display: inline-block;
+    padding-right: 0.3em;
+}
+
+div.shader div.info span.tag {
+    display: inline-block;
+    background: #ddd;
+    padding: 0 0.2em;
+    border-radius: 0.2em;
+    margin-right: 0.3em;
+}

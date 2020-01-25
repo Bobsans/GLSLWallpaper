@@ -1,156 +1,152 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
-    <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{B1D68E2C-C9B9-43E0-A55D-B1611CE4673B}</ProjectGuid>
-        <OutputType>WinExe</OutputType>
-        <RootNamespace>GLSLWallpapers</RootNamespace>
-        <AssemblyName>GLSLWallpapers</AssemblyName>
-        <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-        <FileAlignment>512</FileAlignment>
-        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-        <Deterministic>true</Deterministic>
-        <LangVersion>8</LangVersion>
-    </PropertyGroup>
-    <PropertyGroup>
-        <Win32Resource>Properties/Resources/Resources.res</Win32Resource>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-        <DebugType>pdbonly</DebugType>
-        <Optimize>true</Optimize>
-        <DefineConstants>TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <OutputPath>bin\x86\Release\</OutputPath>
-        <PlatformTarget>x86</PlatformTarget>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <OutputPath>bin\x86\Debug\</OutputPath>
-        <PlatformTarget>x86</PlatformTarget>
-    </PropertyGroup>
-    <ItemGroup>
-        <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c">
-            <HintPath>packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="OpenTK, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
-            <HintPath>packages\OpenTK.3.1.0\lib\net20\OpenTK.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="SciterSharpWindows, Version=2.0.87.0, Culture=neutral, PublicKeyToken=917100d643775a9e">
-            <HintPath>packages\SciterSharpWindows.2.0.87\lib\net45\SciterSharpWindows.dll</HintPath>
-            <Private>True</Private>
-        </Reference>
-        <Reference Include="System"/>
-        <Reference Include="System.Core"/>
-        <Reference Include="System.IO.Compression"/>
-        <Reference Include="System.Xml.Linq"/>
-        <Reference Include="System.Data.DataSetExtensions"/>
-        <Reference Include="Microsoft.CSharp"/>
-        <Reference Include="System.Data"/>
-        <Reference Include="System.Deployment"/>
-        <Reference Include="System.Drawing"/>
-        <Reference Include="System.Net.Http"/>
-        <Reference Include="System.Windows.Forms"/>
-        <Reference Include="System.Xml"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="App.cs"/>
-        <Compile Include="ArchiveResource.cs"/>
-        <Compile Include="Config.cs"/>
-        <Compile Include="Display\Attribute.cs"/>
-        <Compile Include="Display\DisplayWindow.cs"/>
-        <Compile Include="Display\Shader.cs"/>
-        <Compile Include="Display\ShaderProgram.cs"/>
-        <Compile Include="Display\Uniform.cs"/>
-        <Compile Include="Helpers\Converters.cs"/>
-        <Compile Include="Helpers\Logger.cs"/>
-        <Compile Include="Helpers\MathUtils.cs"/>
-        <Compile Include="Helpers\RegistryUtils.cs"/>
-        <Compile Include="Helpers\ShaderRegistry.cs"/>
-        <Compile Include="Host.cs"/>
-        <Compile Include="Reference.cs"/>
-        <Compile Include="Helpers\Win32.cs"/>
-        <Compile Include="Program.cs"/>
-        <Compile Include="Properties\AssemblyInfo.cs"/>
-        <None Include="OpenTK.dll.config"/>
-        <None Include="packages.config"/>
-    </ItemGroup>
-    <ItemGroup>
-        <None Include="App.config"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include=".editorconfig"/>
-        <Content Include=".gitignore"/>
-        <Content Include="data\shaders\301s-fire\info.ini"/>
-        <Content Include="data\shaders\301s-fire\screenshot.png"/>
-        <Content Include="data\shaders\301s-fire\shader.frag"/>
-        <Content Include="data\shaders\301s-fire\thumbnail.png"/>
-        <Content Include="data\shaders\braincells\info.ini"/>
-        <Content Include="data\shaders\braincells\screenshot.png"/>
-        <Content Include="data\shaders\braincells\shader.frag"/>
-        <Content Include="data\shaders\braincells\thumbnail.png"/>
-        <Content Include="data\shaders\celdwhell\info.ini"/>
-        <Content Include="data\shaders\celdwhell\screenshot.png"/>
-        <Content Include="data\shaders\celdwhell\shader.frag"/>
-        <Content Include="data\shaders\celdwhell\thumbnail.png"/>
-        <Content Include="data\shaders\colorful-waves\info.ini"/>
-        <Content Include="data\shaders\colorful-waves\screenshot.png"/>
-        <Content Include="data\shaders\colorful-waves\shader.frag"/>
-        <Content Include="data\shaders\colorful-waves\thumbnail.png"/>
-        <Content Include="data\shaders\colorful-voronoi\info.ini"/>
-        <Content Include="data\shaders\colorful-voronoi\screenshot.png"/>
-        <Content Include="data\shaders\colorful-voronoi\shader.frag"/>
-        <Content Include="data\shaders\colorful-voronoi\thumbnail.png"/>
-        <Content Include="data\shaders\donut\info.ini"/>
-        <Content Include="data\shaders\donut\screenshot.png"/>
-        <Content Include="data\shaders\donut\shader.frag"/>
-        <Content Include="data\shaders\donut\thumbnail.png"/>
-        <Content Include="data\shaders\horse-world\info.ini"/>
-        <Content Include="data\shaders\horse-world\screenshot.png"/>
-        <Content Include="data\shaders\horse-world\shader.frag"/>
-        <Content Include="data\shaders\horse-world\thumbnail.png"/>
-        <Content Include="data\shaders\lightning\info.ini"/>
-        <Content Include="data\shaders\lightning\screenshot.png"/>
-        <Content Include="data\shaders\lightning\shader.frag"/>
-        <Content Include="data\shaders\lightning\thumbnail.png"/>
-        <Content Include="data\shaders\pasta-wires\info.ini"/>
-        <Content Include="data\shaders\pasta-wires\screenshot.png"/>
-        <Content Include="data\shaders\pasta-wires\shader.frag"/>
-        <Content Include="data\shaders\pasta-wires\thumbnail.png"/>
-        <Content Include="data\shaders\v-drop-tunnel\info.ini"/>
-        <Content Include="data\shaders\v-drop-tunnel\screenshot.png"/>
-        <Content Include="data\shaders\v-drop-tunnel\shader.frag"/>
-        <Content Include="data\shaders\v-drop-tunnel\thumbnail.png"/>
-        <Content Include="data\shaders\voronoi-bubbles\info.ini"/>
-        <Content Include="data\shaders\voronoi-bubbles\screenshot.png"/>
-        <Content Include="data\shaders\voronoi-bubbles\shader.frag"/>
-        <Content Include="data\shaders\voronoi-bubbles\thumbnail.png"/>
-        <Content Include="data\shaders\xargantian-polyjupe\info.ini"/>
-        <Content Include="data\shaders\xargantian-polyjupe\screenshot.png"/>
-        <Content Include="data\shaders\xargantian-polyjupe\shader.frag"/>
-        <Content Include="data\shaders\xargantian-polyjupe\thumbnail.png"/>
-        <Content Include="LICENSE.txt"/>
-        <Content Include="sciter.dll">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Sources\flat-theme-demo.htm"/>
-        <Content Include="Sources\flat-theme-elements.htm"/>
-        <Content Include="Sources\flat-theme.css"/>
-        <Content Include="Sources\flat-theme.tis"/>
-        <Content Include="Sources\index.html"/>
-        <Content Include="Sources\settings.html"/>
-        <Content Include="Sources\test.htm"/>
-        <Content Include="Sources\unisex-theme.css"/>
-        <Content Include="Sources\window-metrics.htm"/>
-    </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B1D68E2C-C9B9-43E0-A55D-B1611CE4673B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>GLSLWallpapers</RootNamespace>
+    <AssemblyName>GLSLWallpapers</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <LangVersion>8</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>Properties/Resources/Resources.res</Win32Resource>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <OutputPath>bin\Release\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <OutputPath>bin\Debug\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c">
+      <HintPath>packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OpenTK, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
+      <HintPath>packages\OpenTK.3.1.0\lib\net20\OpenTK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SciterSharpWindows, Version=2.0.87.0, Culture=neutral, PublicKeyToken=917100d643775a9e">
+      <HintPath>packages\SciterSharpWindows.2.0.87\lib\net45\SciterSharpWindows.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="ArchiveResource.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Display\Attribute.cs" />
+    <Compile Include="Display\DisplayWindow.cs" />
+    <Compile Include="Display\Shader.cs" />
+    <Compile Include="Display\ShaderProgram.cs" />
+    <Compile Include="Display\Uniform.cs" />
+    <Compile Include="Helpers\Converters.cs" />
+    <Compile Include="Helpers\Logger.cs" />
+    <Compile Include="Helpers\MathUtils.cs" />
+    <Compile Include="Helpers\RegistryUtils.cs" />
+    <Compile Include="Helpers\ShaderRegistry.cs" />
+    <Compile Include="Host.cs" />
+    <Compile Include="Reference.cs" />
+    <Compile Include="Helpers\Win32.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="OpenTK.dll.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".editorconfig" />
+    <Content Include=".gitignore" />
+    <Content Include="data\app\index.html" />
+    <Content Include="data\app\no-image.png" />
+    <Content Include="data\app\script.tis" />
+    <Content Include="data\app\style.css" />
+    <Content Include="data\app\unisex-theme.css" />
+    <Content Include="data\shaders\301s-fire\info.ini" />
+    <Content Include="data\shaders\301s-fire\screenshot.png" />
+    <Content Include="data\shaders\301s-fire\shader.frag" />
+    <Content Include="data\shaders\301s-fire\thumbnail.png" />
+    <Content Include="data\shaders\braincells\info.ini" />
+    <Content Include="data\shaders\braincells\screenshot.png" />
+    <Content Include="data\shaders\braincells\shader.frag" />
+    <Content Include="data\shaders\braincells\thumbnail.png" />
+    <Content Include="data\shaders\celdwhell\info.ini" />
+    <Content Include="data\shaders\celdwhell\screenshot.png" />
+    <Content Include="data\shaders\celdwhell\shader.frag" />
+    <Content Include="data\shaders\celdwhell\thumbnail.png" />
+    <Content Include="data\shaders\colorful-waves\info.ini" />
+    <Content Include="data\shaders\colorful-waves\screenshot.png" />
+    <Content Include="data\shaders\colorful-waves\shader.frag" />
+    <Content Include="data\shaders\colorful-waves\thumbnail.png" />
+    <Content Include="data\shaders\colorful-voronoi\info.ini" />
+    <Content Include="data\shaders\colorful-voronoi\screenshot.png" />
+    <Content Include="data\shaders\colorful-voronoi\shader.frag" />
+    <Content Include="data\shaders\colorful-voronoi\thumbnail.png" />
+    <Content Include="data\shaders\donut\info.ini" />
+    <Content Include="data\shaders\donut\screenshot.png" />
+    <Content Include="data\shaders\donut\shader.frag" />
+    <Content Include="data\shaders\donut\thumbnail.png" />
+    <Content Include="data\shaders\horse-world\info.ini" />
+    <Content Include="data\shaders\horse-world\screenshot.png" />
+    <Content Include="data\shaders\horse-world\shader.frag" />
+    <Content Include="data\shaders\horse-world\thumbnail.png" />
+    <Content Include="data\shaders\lightning\info.ini" />
+    <Content Include="data\shaders\lightning\screenshot.png" />
+    <Content Include="data\shaders\lightning\shader.frag" />
+    <Content Include="data\shaders\lightning\thumbnail.png" />
+    <Content Include="data\shaders\pasta-wires\info.ini" />
+    <Content Include="data\shaders\pasta-wires\screenshot.png" />
+    <Content Include="data\shaders\pasta-wires\shader.frag" />
+    <Content Include="data\shaders\pasta-wires\thumbnail.png" />
+    <Content Include="data\shaders\v-drop-tunnel\info.ini" />
+    <Content Include="data\shaders\v-drop-tunnel\screenshot.png" />
+    <Content Include="data\shaders\v-drop-tunnel\shader.frag" />
+    <Content Include="data\shaders\v-drop-tunnel\thumbnail.png" />
+    <Content Include="data\shaders\voronoi-bubbles\info.ini" />
+    <Content Include="data\shaders\voronoi-bubbles\screenshot.png" />
+    <Content Include="data\shaders\voronoi-bubbles\shader.frag" />
+    <Content Include="data\shaders\voronoi-bubbles\thumbnail.png" />
+    <Content Include="data\shaders\xargantian-polyjupe\info.ini" />
+    <Content Include="data\shaders\xargantian-polyjupe\screenshot.png" />
+    <Content Include="data\shaders\xargantian-polyjupe\shader.frag" />
+    <Content Include="data\shaders\xargantian-polyjupe\thumbnail.png" />
+    <Content Include="LICENSE.txt" />
+    <Content Include="Sciter.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

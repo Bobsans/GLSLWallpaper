@@ -8,7 +8,4 @@ bin/
 obj/
 packages/
 _release/
-_utils/
-*.py
-*.iss
 *.res
