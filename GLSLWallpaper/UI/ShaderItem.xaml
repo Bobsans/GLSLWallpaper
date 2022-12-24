@@ -1,0 +1,28 @@
+<UserControl x:Class="GLSLWallpaper.UI.ShaderItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:common="clr-namespace:GLSLWallpaper.Common;assembly=GLSLWallpaper.Common"
+             mc:Ignorable="d"
+             d:DesignHeight="72"
+             d:DesignWidth="400"
+             d:DataContext="{d:DesignInstance common:ShaderPack}">
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="128"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0" Source="{Binding Thumbnail}" Margin="0, 3"/>
+        <StackPanel Grid.Column="1" Margin="5">
+            <Label Style="{StaticResource LabelTitle}" Content="{Binding Meta.Name}" />
+            <StackPanel Orientation="Horizontal">
+                <Label Style="{StaticResource LabelBoldBase}" Content="Author:" Padding="0,0,5,0" />
+                <Label Style="{StaticResource LabelBase}" Content="{Binding Meta.Author}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
