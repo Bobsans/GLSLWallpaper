@@ -11,25 +11,25 @@ public static class Logger {
     }
 
     public static void Debug(string value) {
-        Log(LogLevel.DEBUG, value);
+        Log(LogLevel.Debug, value);
     }
 
     public static void Info(string value) {
-        Log(LogLevel.INFO, value);
+        Log(LogLevel.Info, value);
     }
 
     public static void Warning(string value) {
-        Log(LogLevel.WARNING, value);
+        Log(LogLevel.Warning, value);
     }
 
     public static void Error(string value) {
-        Log(LogLevel.ERROR, value);
+        Log(LogLevel.Error, value);
     }
 }
 
 enum LogLevel {
-    DEBUG,
-    INFO,
-    WARNING,
-    ERROR
+    Debug,
+    Info,
+    Warning,
+    Error
 }

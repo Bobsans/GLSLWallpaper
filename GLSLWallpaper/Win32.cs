@@ -56,8 +56,8 @@ public static partial class Win32 {
     }
 
     public static Point GetMousePosition() {
-        GetCursorPos(out Point _point);
-        return _point;
+        GetCursorPos(out Point point);
+        return point;
     }
 
     public static MouseState GetMouseState() {

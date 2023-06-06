@@ -5,7 +5,7 @@ using System.Reflection;
 namespace GLSLWallpaper;
 
 public static class Settings {
-    public static readonly string ROOT = Path.GetDirectoryName(Assembly.GetAssembly(typeof(Identity))!.Location)!;
+    public static readonly string ROOT = Path.GetDirectoryName(Assembly.GetAssembly(typeof(Settings))!.Location)!;
     public static readonly string PACKS_DIRECTORY = Path.Combine(ROOT, "Packs");
 
     static double _timeScale = 1.0; // 0.0..2.0

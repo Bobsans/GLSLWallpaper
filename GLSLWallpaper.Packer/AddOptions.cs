@@ -1,10 +1,12 @@
 using CommandLine;
 
-[Verb("add", HelpText = "Add shader to sources")]
+namespace GLSLWallpaper.Packer;
+
+[Verb("add", HelpText = "Add shader to sources"), Serializable]
 public class AddOptions {
-    [Option("shader", HelpText = "Fragment shader path")]
+    [Value(0, MetaName = "shader", Required = true, HelpText = "Fragment shader path")]
     public string ShaderPath { get; set; } = null!;
-    
+
     [Option("author", HelpText = "Shader author")]
     public string Author { get; set; } = null!;
 

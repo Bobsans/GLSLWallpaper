@@ -10,6 +10,9 @@ using YamlDotNet.Serialization;
 namespace GLSLWallpaper.Packer;
 
 public static class Worker {
+    static readonly Regex _nameRegex = new(@"/\*\s+Name:\s+(?<value>.*)\s+\*/", RegexOptions.Compiled);
+    static readonly Regex _authorRegex = new(@"/\*\s+Author:\s+(?<value>.*)\s+\*/", RegexOptions.Compiled);
+
     public static int Pack(PackOptions options, Settings settings) {
         if (string.IsNullOrEmpty(options.OutputPath)) {
             Console.Error.WriteLine("Output path not specified!");
@@ -74,6 +77,16 @@ public static class Worker {
     }
 
     public static int Add(AddOptions options, Settings settings) {
+        if (string.IsNullOrEmpty(options.ShaderPath)) {
+            Console.Error.WriteLine("Invalid shader file path!");
+            return -1;
+        }
+
+        if (!File.Exists(options.ShaderPath)) {
+            Console.Error.WriteLine($"File {options.ShaderPath} not found!");
+            return -1;
+        }
+
         string outPath = Path.Join(string.IsNullOrEmpty(options.OutputPath) ? settings.OutputPath : options.OutputPath, ToUrlSlug(options.Name));
 
         if (Directory.Exists(outPath)) {
@@ -88,19 +101,9 @@ public static class Worker {
             }
         }
 
-        byte[]? shader = null;
+        string shader = File.ReadAllText(options.ShaderPath);
 
-        if (!string.IsNullOrEmpty(options.ShaderPath)) {
-            if (File.Exists(options.ShaderPath)) {
-                shader = File.ReadAllBytes(options.ShaderPath);
-            } else {
-                Console.Error.WriteLine($"File {options.ShaderPath} not found!");
-            }
-        }
-
-        new Window(
-            shader != null ? Encoding.UTF8.GetString(shader) : null,
-            bmp => {
+        new Window(shader, bmp => {
                 using MemoryStream s = new();
                 bmp.Save(s, ImageFormat.Png);
                 byte[] buff = s.GetBuffer();
@@ -118,14 +121,36 @@ public static class Worker {
             }
         ).Run();
 
-        if (shader != null) {
-            using Stream es = File.Create(Path.Join(outPath, "shader.frag"));
-            es.Write(shader);
+        string name = options.Name;
+        string author = options.Author;
+
+        if (string.IsNullOrEmpty(name)) {
+            Match nameMatch = _nameRegex.Match(shader);
+            if (nameMatch.Success) {
+                name = nameMatch.Groups["value"].Value;
+                _nameRegex.Replace(shader, string.Empty);
+            } else {
+                Console.Error.WriteLine("Name not specified!");
+                return -1;
+            }
         }
-        
+
+        if (string.IsNullOrEmpty(author)) {
+            Match authorMatch = _authorRegex.Match(shader);
+            if (authorMatch.Success) {
+                author = authorMatch.Groups["value"].Value;
+                _authorRegex.Replace(shader, string.Empty);
+            } else {
+                Console.Error.WriteLine("Author not specified!");
+                return -1;
+            }
+        }
+
+        File.WriteAllText(Path.Join(outPath, "shader.frag"), shader.Trim());
+
         using Stream ems = File.Create(Path.Join(outPath, "meta.yaml"));
         using TextWriter tw = new StreamWriter(ems);
-        new SerializerBuilder().Build().Serialize(tw, new ShaderPack.PackMeta { Name = options.Name, Author = options.Author });
+        new SerializerBuilder().Build().Serialize(tw, new ShaderPack.PackMeta { Name = name, Author = author });
 
         return 0;
     }

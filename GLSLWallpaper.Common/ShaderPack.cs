@@ -58,6 +58,7 @@ public class ShaderPack {
         return this;
     }
 
+    [Serializable]
     public class PackMeta {
         public string Name { get; set; } = null!;
         public string Author { get; set; } = null!;

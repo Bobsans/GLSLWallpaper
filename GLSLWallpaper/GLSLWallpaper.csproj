@@ -12,10 +12,11 @@
         <FileVersion>1.0.0.0</FileVersion>
         <Copyright>Darkboy, Inc.</Copyright>
         <Win32Resource>Resources\Resources.res</Win32Resource>
-        <Configurations>Release;Debug</Configurations>
-        <Platforms>x64</Platforms>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU</Platforms>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
-    
+
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <GenerateDependencyFile>false</GenerateDependencyFile>
         <DebugType>none</DebugType>

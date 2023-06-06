@@ -5,10 +5,16 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Exe</OutputType>
-        <Configurations>Release;Debug</Configurations>
-        <Platforms>x64</Platforms>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU</Platforms>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
-
+    
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+        <GenerateDependencyFile>false</GenerateDependencyFile>
+        <DebugType>none</DebugType>
+    </PropertyGroup>
+    
     <ItemGroup>
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
       <PackageReference Include="DimTim.Configuration.Yaml" Version="0.0.4" />

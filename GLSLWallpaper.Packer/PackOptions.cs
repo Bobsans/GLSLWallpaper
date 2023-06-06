@@ -1,6 +1,8 @@
 using CommandLine;
 
-[Verb("pack", HelpText = "Pack shaders")]
+namespace GLSLWallpaper.Packer; 
+
+[Verb("pack", HelpText = "Pack shaders"), Serializable]
 public class PackOptions {
     [Option("input", HelpText = "Shaders sources path")]
     public string InputPath { get; set; } = null!;

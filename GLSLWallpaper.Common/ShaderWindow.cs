@@ -5,7 +5,7 @@ using OpenTK.Windowing.Desktop;
 namespace GLSLWallpaper.Common;
 
 public abstract class ShaderWindow : GameWindow {
-    protected ShaderProgram? ShaderProgram { get; set; }
+    ShaderProgram? ShaderProgram { get; set; }
 
     int _vbo;
     int _vao;
