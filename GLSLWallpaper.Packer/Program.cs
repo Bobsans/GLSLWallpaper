@@ -1,12 +1,13 @@
-﻿using System.Reflection;
-using CommandLine;
-using DimTim.Configuration.Yaml;
+﻿using CommandLine;
 using GLSLWallpaper.Packer;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
-Settings settings = YamlConfigProvider.Load<Settings>(Path.Join(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "settings.yaml"));
+IDeserializer deserializer = new DeserializerBuilder().WithNamingConvention(UnderscoredNamingConvention.Instance).Build();
+Config config = deserializer.Deserialize<Config>(File.ReadAllText(Path.Join(Config.Root, "config.yaml")));
 
 Parser.Default.ParseArguments<AddOptions, PackOptions>(args).MapResult(
-    (AddOptions opts) => Worker.Add(opts, settings),
-    (PackOptions opts) => Worker.Pack(opts, settings),
+    (AddOptions opts) => Worker.Add(opts, config),
+    (PackOptions opts) => Worker.Pack(opts, config),
     _ => 1
 );

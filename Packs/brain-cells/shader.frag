@@ -1,7 +1,7 @@
-#version 330 core
+#version 300 es
 precision highp float;
 
-out vec4 fragColor;
+out vec4 outColor;
 
 uniform float time;
 uniform vec2 resolution;
@@ -105,5 +105,5 @@ void main() {
     vec3 p = ro + rd * d;
     vec3 fog = vec3(1.2 / (1.0 + d * d * 0.3));
 
-    fragColor = vec4((fog + (marchCount * vec3((cos(time + -p.z) * 2.0), 0.15, 0.0) * 0.02)) * fog, 1.0);
+    outColor = vec4((fog + (marchCount * vec3((cos(time + -p.z) * 2.0), 0.15, 0.0) * 0.02)) * fog, 1.0);
 }

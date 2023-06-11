@@ -1,7 +1,7 @@
-#version 330 core
+#version 300 es
 precision highp float;
 
-out vec4 fragColor;
+out vec4 outColor;
 
 uniform float time;
 uniform vec2 resolution;
@@ -201,5 +201,5 @@ void main() {
     C = mix(C, vec3(0.1), 1.0 - exp(-0.00003 * fa * fa * fa));
     C = mix(C, vec3(sglow, sglow * 0.5, sglow * 0.3), clamp(sglow, 0.0, 1.0));
     C = pow(C, vec3(0.4545));
-    fragColor = vec4(C, 1.0);
+    outColor = vec4(C, 1.0);
 }

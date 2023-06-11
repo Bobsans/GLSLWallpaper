@@ -1,7 +1,7 @@
-#version 330 core
+#version 300 es
 precision highp float;
 
-out vec4 fragColor;
+out vec4 outColor;
 
 uniform float time;
 uniform vec2 resolution;
@@ -14,5 +14,5 @@ void main() {
     vec4 e = s.yzwx;
     vec4 f = max(o.x - s, e - o.x);
 
-    fragColor = dot(clamp(f * resolution.y, 0.0, 1.0), 72.0 * (s - e)) * (s - 0.1) + f;
+    outColor = dot(clamp(f * resolution.y, 0.0, 1.0), 72.0 * (s - e)) * (s - 0.1) + f;
 }

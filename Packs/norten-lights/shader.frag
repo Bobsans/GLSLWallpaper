@@ -1,14 +1,10 @@
-#ifdef GL_ES
-precision mediump float;
-#endif
+#version 300 es
+precision highp float;
 
-#extension GL_OES_standard_derivatives : enable
+out vec4 outColor;
 
 uniform float time;
-uniform vec2 mouse;
 uniform vec2 resolution;
-
-
 
 #define iTime time
 
@@ -17,8 +13,7 @@ mat2 m2 = mat2(0.95534, 0.29552, -0.29552, 0.95534);
 float tri(in float x){return clamp(abs(fract(x)-.5),0.01,0.49);}
 vec2 tri2(in vec2 p){return vec2(tri(p.x)+tri(p.y),tri(p.y+tri(p.x)));}
 
-float triNoise2d(in vec2 p, float spd)
-{
+float triNoise2d(in vec2 p, float spd) {
     float z=1.8;
     float z2=2.5;
 	float rz = 0.;
@@ -147,5 +142,5 @@ void main()
         col += mix(vec3(0.2,0.25,0.5)*0.08,vec3(0.3,0.3,0.5)*0.7, nz2*0.5);
     }
     
-	gl_FragColor = vec4(normalize(col) * sqrt(length(col)), 1.0);
+	outColor = vec4(normalize(col) * sqrt(length(col)), 1.0);
 }

@@ -1,4 +1,4 @@
-#version 330 core
+#version 300 es
 precision highp float;
 
 out vec4 outColor;
@@ -98,7 +98,7 @@ vec2 getScreenSpace() {
 void main() {
     vec2 uv = getScreenSpace();
 
-    outColor = texture2D(u_noise, uv + diagonalhash2(uv + time * 0.1)) * 0.2;
+    outColor = texture(u_noise, uv + diagonalhash2(uv + time * 0.1)) * 0.2;
 
     vec2 m = mouse.xy - uv;
     float multiplier = 1.5;

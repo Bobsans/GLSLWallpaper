@@ -1,7 +1,9 @@
 using System.Collections.Concurrent;
+using System.Drawing.Imaging;
 using GLSLWallpaper.Common;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
+using OpenTK.Windowing.Common.Input;
 using OpenTK.Windowing.Desktop;
 using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
@@ -13,11 +15,12 @@ public sealed class Window : ShaderWindow {
     double _time;
     string? _currentFile;
     FileSystemWatcher? _watcher;
-    Task? _watchTask;
     readonly ErrorForm _errorForm;
 
     public Window(string? file, bool watch = false) : base(new NativeWindowSettings {
-        Size = new Vector2i(960, 540)
+        Size = new Vector2i(960, 540),
+        Icon = GetIcon(),
+        Title = Identity.NAME + Identity.Version
     }) {
         _watch = watch;
 
@@ -57,27 +60,31 @@ public sealed class Window : ShaderWindow {
 
     void WatchForChangesIfNeed() {
         if (_watch && _currentFile != null) {
-            _watchTask?.Dispose();
-            _watcher?.Dispose();
-
-            _watcher = new FileSystemWatcher(Path.GetDirectoryName(_currentFile)!);
-            _watcher.Changed += (_, args) => {
-                Console.WriteLine($"{args.FullPath} :: {args.ChangeType}");
-                if (args.FullPath == _currentFile) {
-                    Task.Run(async () => {
-                        await Task.Delay(100);
+            if (_watcher == null) {
+                _watcher = new FileSystemWatcher(Path.GetDirectoryName(_currentFile)!) {
+                    EnableRaisingEvents = true
+                };
+                _watcher.Changed += (_, args) => {
+                    if (args.FullPath == _currentFile) {
+                        Task.Run(async () => {
+                            await Task.Delay(100);
+                            LoadShaderFromFile(args.FullPath);
+                        });
+                    }
+                };
+                _watcher.Deleted += (_, args) => {
+                    if (args.FullPath == _currentFile) {
+                        _currentFile = null;
+                    }
+                };
+                _watcher.Renamed += (_, args) => {
+                    if (args.OldFullPath == _currentFile) {
                         LoadShaderFromFile(args.FullPath);
-                    });
-                }
-            };
-            _watcher.Deleted += (_, args) => {
-                Console.WriteLine($"{args.FullPath} :: {args.ChangeType}");
-                if (args.FullPath == _currentFile) {
-                    _currentFile = null;
-                }
-            };
-
-            _watchTask = Task.Run(() => _watcher.WaitForChanged(WatcherChangeTypes.Changed | WatcherChangeTypes.Deleted));
+                    }
+                };
+            } else {
+                _watcher.Path = Path.GetDirectoryName(_currentFile)!;
+            }
         }
     }
 
@@ -98,5 +105,13 @@ public sealed class Window : ShaderWindow {
         } else if (e is { Key: Keys.Enter, Alt: true }) {
             WindowState = IsFullscreen ? WindowState.Normal : WindowState.Fullscreen;
         }
+    }
+
+    static WindowIcon GetIcon() {
+        Bitmap icon = System.Drawing.Icon.ExtractAssociatedIcon(typeof(Window).Assembly.Location)!.ToBitmap();
+        BitmapData bits = icon.LockBits(new Rectangle(0, 0, icon.Width, icon.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+        byte[] bytes = new byte[icon.Width * icon.Height * 4];
+        System.Runtime.InteropServices.Marshal.Copy(bits.Scan0, bytes, 0, bytes.Length);
+        return new WindowIcon(new OpenTK.Windowing.Common.Input.Image(icon.Width, icon.Height, bytes));
     }
 }

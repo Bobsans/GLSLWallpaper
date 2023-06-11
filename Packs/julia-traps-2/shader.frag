@@ -1,7 +1,7 @@
-#version 330 core
+#version 300 es
 precision highp float;
 
-out vec4 fragColor;
+out vec4 outColor;
 
 uniform float time;
 uniform vec2 resolution;
@@ -23,5 +23,5 @@ void main() {
     color = 1.25 * color * color;
     color *= 0.5 + 0.5 * pow(16.0 * p.x * (1.0 - p.x) * p.y * (1.0 - p.y), 0.15);
 
-    fragColor = vec4(color, 1.0);
+    outColor = vec4(color, 1.0);
 }

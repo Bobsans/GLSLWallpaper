@@ -1,8 +1,10 @@
 #version 300 es
 precision highp float;
 
-uniform vec2 resolution;
+out vec4 outColor;
+
 uniform float time;
+uniform vec2 resolution;
 
 #define PI    3.14159265358
 #define PI2   6.28318530718
@@ -66,5 +68,5 @@ void main() {
     C = mix(C, vec3(0.001), clamp(min(circle, c2), 0.0, 1.0));
 
     C = pow(C, vec3(0.4545));
-    gl_FragColor = vec4(C, 1.0);
+    outColor = vec4(C, 1.0);
 }

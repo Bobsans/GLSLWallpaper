@@ -20,7 +20,7 @@ public abstract class ShaderWindow : GameWindow {
         GL.BufferData(BufferTarget.ArrayBuffer, _vertices.Length * sizeof(float), _vertices, BufferUsageHint.StaticDraw);
         _vao = GL.GenVertexArray();
         GL.BindVertexArray(_vao);
-        GL.VertexAttribPointer(0, 2, VertexAttribPointerType.Float, false, 2 * sizeof(float), 0);
+        GL.VertexAttribPointer(0, 2, VertexAttribPointerType.Float, false, 0, 0);
         GL.EnableVertexAttribArray(0);
 
         base.OnLoad();
@@ -47,19 +47,12 @@ public abstract class ShaderWindow : GameWindow {
         if (ShaderProgram != null) {
             SetUniforms(ShaderProgram, e.Time);
         }
-
-        base.OnUpdateFrame(e);
     }
 
     protected override void OnRenderFrame(FrameEventArgs e) {
         GL.Clear(ClearBufferMask.ColorBufferBit);
-
-        GL.BindVertexArray(_vao);
         GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
-        
         SwapBuffers();
-
-        base.OnRenderFrame(e);
     }
 
     protected virtual void SetShader(string? shaderSource) {

@@ -1,7 +1,7 @@
-#version 330 core
+#version 300 es
 precision highp float;
 
-out vec4 fragColor;
+out vec4 outColor;
 
 uniform float time;
 uniform vec2 resolution;
@@ -164,5 +164,5 @@ void main() {
     d = min(d, horseDist(translate(uv, vec2(sin(time), 0.0) * 100.0)));
     d = smoothstep(1.5 * 1000.0 / resolution.y, 0.0, d - 10000.0 / exp(time * 10.0));
 
-    fragColor = vec4(vec3(0.5 + 0.5 * sin(ct), 0.5 + 0.5 * cos(ct * 1.3), 0.5 + 0.5 * cos(ct * 1.5)) * 0.5 + d, 1.0);
+    outColor = vec4(vec3(0.5 + 0.5 * sin(ct), 0.5 + 0.5 * cos(ct * 1.3), 0.5 + 0.5 * cos(ct * 1.5)) * 0.5 + d, 1.0);
 }

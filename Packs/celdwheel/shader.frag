@@ -1,7 +1,7 @@
-#version 330 core
+#version 300 es
 precision highp float;
 
-out vec4 fragColor;
+out vec4 outColor;
 
 uniform float time;
 uniform vec2 resolution;
@@ -21,7 +21,7 @@ void main() {
         f += mod(sin(time) * p.y + cos(time) * p.x, 1.0 - p.y) / (floor(-d - fract(12.0 * d) + 2.5) + p.x * c + fract(0.35 * time - 2.0 * d) + p.y * s);
     }
 
-    fragColor = vec4(max(
+    outColor = vec4(max(
         cos(acos((mouse.y / resolution.y) * 1.7 * p.y) * f + color), 
         1.0 - vec3(fract(2.0 * time), 0, 0.0) - (mod(f, fract(time + 12.0 * abs(p.x) - 2.0 * p.y)) + acos(1.05 * abs(p.y)))
     ), 1.0);

@@ -1,5 +1,7 @@
-#version 330 core
+#version 300 es
 precision highp float;
+
+out vec4 outColor;
 
 uniform float time;
 uniform vec2 resolution;
@@ -88,5 +90,5 @@ void main() {
     vig = vig * vig + 1.0;
     col *= 1.0 / (vig * vig);
 
-    gl_FragColor = vec4(col, 1.0);
+    outColor = vec4(col, 1.0);
 }

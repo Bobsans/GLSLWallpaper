@@ -5,11 +5,16 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Exe</OutputType>
-        <Configurations>Debug;Release</Configurations>
-        <Platforms>AnyCPU</Platforms>
+        <Configurations>Release;Debug</Configurations>
+        <Platforms>x64</Platforms>
         <LangVersion>default</LangVersion>
+        <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <SelfContained>false</SelfContained>
+        <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
     </PropertyGroup>
-    
+
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <GenerateDependencyFile>false</GenerateDependencyFile>
         <DebugType>none</DebugType>
@@ -17,13 +22,10 @@
     
     <ItemGroup>
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
-      <PackageReference Include="DimTim.Configuration.Yaml" Version="0.0.4" />
       <PackageReference Include="SkiaSharp" Version="2.88.3" />
-      <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\GLSLWallpaper.Common\GLSLWallpaper.Common.csproj" />
     </ItemGroup>
-
 </Project>

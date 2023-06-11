@@ -11,6 +11,8 @@ public partial class MainWindow {
     }
 
     void ConfigureComponents() {
+        Title = $"{Identity.NAME} v{Identity.VERSION}";
+        
         ShaderList.ItemsSource = PackRegistry.Packs;
 
         UpdatesPerSecondValue.Content = Settings.UpdatesPerSecond;

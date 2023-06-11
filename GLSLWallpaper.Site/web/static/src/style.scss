@@ -1,0 +1,43 @@
+// Reset
+
+*, *:after, *:before {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+}
+
+pre {
+    margin: 0;
+}
+
+// App
+body {
+    position: relative;
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+}
+
+header {
+    background: red
+}
+
+footer {
+    background: green;
+}
+
+main {
+
+}
+
+canvas.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: -1;
+}

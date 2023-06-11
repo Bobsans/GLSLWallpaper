@@ -7,6 +7,14 @@
         <UseWindowsForms>true</UseWindowsForms>
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>default</LangVersion>
+        <Configurations>Release;Debug</Configurations>
+        <Platforms>x64</Platforms>
+        <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+        <IsPackable>false</IsPackable>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.0</FileVersion>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <SelfContained>false</SelfContained>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
@@ -15,11 +23,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\GLSLWallpaper.Common\GLSLWallpaper.Common.csproj" />
+        <ProjectReference Include="..\GLSLWallpaper.Common\GLSLWallpaper.Common.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="CommandLineParser" Version="2.9.1" />
+        <PackageReference Include="CommandLineParser" Version="2.9.1"/>
     </ItemGroup>
 
 </Project>

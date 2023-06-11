@@ -24,10 +24,10 @@ public partial class App {
 
     protected override void OnStartup(StartupEventArgs e) {
         ProcessArguments(e.Args);
-        
+
         if (_mutex.WaitOne(TimeSpan.Zero, true)) {
             base.OnStartup(e);
-            
+
             Settings.Load();
             PackRegistry.Load();
 
@@ -35,11 +35,16 @@ public partial class App {
                 Icon = Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location),
                 Visibility = Visibility.Visible,
                 ContextMenu = (ContextMenu)FindResource("MainContextMenu")!,
-                MenuActivation = PopupActivationMode.RightClick
+                MenuActivation = PopupActivationMode.LeftOrRightClick,
+                NoLeftClickDelay = true
             };
-            
+
             BackgroundWindow.RunThreaded();
-            BackgroundWindow.EnqueueShader(PackRegistry.GetByHash(Settings.CurrentShader, () => PackRegistry.Packs.First()));
+
+            if (PackRegistry.Packs.Count > 0) {
+                BackgroundWindow.EnqueueShader(PackRegistry.GetByHash(Settings.CurrentShader, () => PackRegistry.Packs.First()));
+            }
+
             Win32.SetWindowAsDesktopChild(Process.GetCurrentProcess().MainWindowHandle);
             PipeWorker.RunServer();
         } else {

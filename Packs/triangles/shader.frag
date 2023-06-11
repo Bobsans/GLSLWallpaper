@@ -1,5 +1,7 @@
-#version 330 core
-precision mediump float;
+#version 300 es
+precision highp float;
+
+out vec4 outColor;
 
 uniform float time;
 uniform vec2 resolution;
@@ -108,5 +110,5 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
 void main(void)
 {
-    mainImage(gl_FragColor, gl_FragCoord.xy);
+    mainImage(outColor, gl_FragCoord.xy);
 }

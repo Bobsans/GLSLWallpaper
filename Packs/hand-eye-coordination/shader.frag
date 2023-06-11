@@ -1,7 +1,7 @@
-#version 330 core
+#version 300 es
 precision highp float;
 
-out vec4 fragColor;
+out vec4 outColor;
 
 uniform float time;
 uniform vec2 resolution;
@@ -223,16 +223,16 @@ float eye(vec2 p) {
 
 float starn(vec2 p, float r, float n, float m) {
     // next 4 lines can be precomputed for a given shape
-    float an = 3.141593/float(n);
-    float en = 3.141593/m;// m is between 2 and n
+    float an = 3.141593 / float(n);
+    float en = 3.141593 / m;// m is between 2 and n
     vec2  acs = vec2(cos(an), sin(an));
     vec2  ecs = vec2(cos(en), sin(en));// ecs=vec2(0,1) for regular polygon
 
-    float bn = mod(atan(p.x, p.y), 2.0*an) - an;
-    p = length(p)*vec2(cos(bn), abs(sin(bn)));
-    p -= r*acs;
-    p += ecs*clamp(-dot(p, ecs), 0.0, r*acs.y/ecs.y);
-    return length(p)*sign(p.x);
+    float bn = mod(atan(p.x, p.y), 2.0 * an) - an;
+    p = length(p) * vec2(cos(bn), abs(sin(bn)));
+    p -= r * acs;
+    p += ecs * clamp(-dot(p, ecs), 0.0, r * acs.y / ecs.y);
+    return length(p) * sign(p.x);
 }
 
 vec2 hand(vec2 p) {
@@ -242,9 +242,9 @@ vec2 hand(vec2 p) {
     float d0 = segmenty(p0, 0.61)-0.1;
     vec2 p1 = p;
     p1 -= vec2(0.2, 0.125);
-    float d1 = segmenty(p1, 0.55)-0.09;
+    float d1 = segmenty(p1, 0.55) - 0.09;
     vec2 p2 = p;
-    p2 -= vec2(0.0, -0.38+0.3);
+    p2 -= vec2(0.0, -0.38 + 0.3);
     p2.y = -p2.y;
     float d2 = unevenCapsule(p2, 0.3, 0.38, 0.3);
     vec2 p3 = p;
@@ -260,7 +260,7 @@ vec2 hand(vec2 p) {
     p5 -= vec2(0.0, -0.45);
     //  float d5 = vesica(p5.yx, 0.175, 0.1)-0.2;
     float d5 = starn(p5.yx, 0.33, 10.0, 3.5);
-    float d6 = abs(d5-0.005)-0.005;
+    float d6 = abs(d5 - 0.005) - 0.005;
 
 
     d0 = min(d0, d1);
@@ -269,13 +269,13 @@ vec2 hand(vec2 p) {
 
     float d = d3;
     d = min(d, d2);
-    d = pmax(d, -(d0-0.01), 0.025);
+    d = pmax(d, -(d0 - 0.01), 0.025);
     d = min(d, d0);
     float ds = max(min(d0, d3), -d5);
     d = max(d, -d6);
 
     float od = d;
-    od = abs(od-0.02)-0.0075;
+    od = abs(od - 0.02) - 0.0075;
 
     d = min(d, od);
     d = pmin(d, d5, 0.01);
@@ -295,7 +295,7 @@ float weird(vec2 p) {
 
 float df(vec2 p) {
     const float zw = 1.25;
-    float da = weird(p/zw)*zw;
+    float da = weird(p / zw) * zw;
     vec2 dh = hand(p);
     const float ze = 0.28;
     vec2 pe = p;
@@ -311,14 +311,14 @@ float df(vec2 p) {
 }
 
 void main() {
-    float aa = 2.0/resolution.y;
-    vec2 q = gl_FragCoord.xy/resolution.xy;
+    float aa = 2.0 / resolution.y;
+    vec2 q = gl_FragCoord.xy / resolution.xy;
     vec2 p = -1.0 + 2.0 * q;
-    p.x    *= resolution.x/resolution.y;
-    vec3 col = vec3(0.1*q.y);
+    p.x *= resolution.x / resolution.y;
+    vec3 col = vec3(0.1 * q.y);
     float d = df(p);
     float fade = smoothstep(0.0, 4.0, time);
-    col = mix(col, mix(vec3(1.0, 0.5, 0.5), vec3(.5, 0.55, 0.95), q.y), smoothstep(aa, -aa, d)*fade);
-    col = postProcess(col, q);
-    fragColor = vec4(col, 1.0);
+    col = mix(col, mix(vec3(1.0, 0.5, 0.5), vec3(0.5, 0.55, 0.95), q.y), smoothstep(aa, -aa, d) * fade);
+    
+    outColor = vec4(postProcess(col, q), 1.0);
 }

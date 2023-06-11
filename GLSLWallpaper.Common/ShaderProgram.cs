@@ -4,7 +4,7 @@ using OpenTK.Mathematics;
 namespace GLSLWallpaper.Common;
 
 public class ShaderProgram {
-    const string DEFAULT_FRAGMENT_SHADER = "void main() { gl_fragColor = vec4(1.0, 1.0, 1.0, 1.0); }";
+    const string DEFAULT_FRAGMENT_SHADER = "void main() { gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0); }";
 
     public int Handle { get; }
     public Dictionary<string, int> Uniforms { get; }

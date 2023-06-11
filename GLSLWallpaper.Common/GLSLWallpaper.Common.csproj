@@ -4,20 +4,22 @@
         <TargetFramework>net7.0-windows</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Configurations>Debug;Release</Configurations>
-        <Platforms>AnyCPU</Platforms>
+        <Configurations>Release;Debug</Configurations>
+        <Platforms>x64</Platforms>
         <LangVersion>default</LangVersion>
         <IsPackable>false</IsPackable>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <SelfContained>false</SelfContained>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <GenerateDependencyFile>false</GenerateDependencyFile>
         <DebugType>none</DebugType>
     </PropertyGroup>
-    
+
     <ItemGroup>
-      <PackageReference Include="OpenTK" Version="4.7.5" />
-      <PackageReference Include="YamlDotNet" Version="12.2.1" />
+        <PackageReference Include="OpenTK" Version="4.7.7"/>
+        <PackageReference Include="YamlDotNet" Version="13.1.0"/>
     </ItemGroup>
 
 </Project>

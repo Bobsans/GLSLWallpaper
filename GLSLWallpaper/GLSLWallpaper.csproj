@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
@@ -8,45 +8,47 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <IsPackable>false</IsPackable>
         <Company>Darkboy, Inc.</Company>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <FileVersion>1.0.0.0</FileVersion>
+        <FileVersion>1.1.2</FileVersion>
+        <AssemblyVersion>1.1.2</AssemblyVersion>
         <Copyright>Darkboy, Inc.</Copyright>
-        <Win32Resource>Resources\Resources.res</Win32Resource>
-        <Configurations>Debug;Release</Configurations>
-        <Platforms>AnyCPU</Platforms>
+        <Win32Resource>Resources\resources.res</Win32Resource>
+        <Configurations>Release;Debug</Configurations>
+        <Platforms>x64</Platforms>
         <LangVersion>default</LangVersion>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <SelfContained>false</SelfContained>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <GenerateDependencyFile>false</GenerateDependencyFile>
         <DebugType>none</DebugType>
     </PropertyGroup>
-    
+
     <ItemGroup>
-      <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+        <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <Page Update="UI\ShaderItem.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="UI\MainWindow.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
+        <Page Update="UI\ShaderItem.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="UI\MainWindow.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="UI\ShaderItem.xaml.cs">
-        <SubType>Code</SubType>
-      </Compile>
+        <Compile Update="UI\ShaderItem.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\GLSLWallpaper.Common\GLSLWallpaper.Common.csproj" />
+        <ProjectReference Include="..\GLSLWallpaper.Common\GLSLWallpaper.Common.csproj" />
     </ItemGroup>
 
 </Project>

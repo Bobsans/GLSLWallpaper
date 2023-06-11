@@ -1,9 +1,8 @@
-#version 330 core
+#version 300 es
 precision highp float;
 
-out vec4 fragColor;
+out vec4 outColor;
 
-// glslsandbox uniforms
 uniform float time;
 uniform vec2 resolution;
 
@@ -230,5 +229,5 @@ void mainImage( out vec4 O, in vec2 g)
 }
 
 void main() {
-    mainImage(fragColor, gl_FragCoord.xy);
+    mainImage(outColor, gl_FragCoord.xy);
 }

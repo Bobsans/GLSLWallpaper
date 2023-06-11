@@ -1,5 +1,7 @@
-#version 330 core
+#version 300 es
 precision highp float;
+
+out vec4 outColor;
 
 uniform float time;
 uniform vec2 resolution;
@@ -12,5 +14,5 @@ void main( void ) {
 	vec2 uv = gl_FragCoord.xy / resolution.xy;
 	float t = rand(uv + vec2(time * rand(vec2(uv.x, time)), 0.0));
 
-	gl_FragColor = vec4(t, t, t, 1.0);
+	outColor = vec4(t, t, t, 1.0);
 }

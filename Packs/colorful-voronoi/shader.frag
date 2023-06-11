@@ -1,7 +1,7 @@
-#version 330 core
+#version 300 es
 precision highp float;
 
-out vec4 fragColor;
+out vec4 outColor;
 
 uniform float time;
 uniform vec2 resolution;
@@ -33,5 +33,5 @@ void main() {
     float offset = voronoi(uv * 10.0 + vec2(time));
     float t = 1.0 / abs(((uv.x + sin(uv.y + time)) + offset) * 30.0);
 
-    fragColor = vec4(vec3(10.0 * uv.y, 2.0, voronoi(uv * 7.0) * 10.0) * t, 8.0);
+    outColor = vec4(vec3(10.0 * uv.y, 2.0, voronoi(uv * 7.0) * 10.0) * t, 8.0);
 }

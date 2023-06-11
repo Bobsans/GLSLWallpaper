@@ -1,10 +1,10 @@
-#version 330 core
+#version 300 es
 precision highp float;
 
 out vec4 outColor;
 
-uniform vec2 resolution;
 uniform float time;
+uniform vec2 resolution;
 
 float hash(float x) {
     return fract(sin(x) * 48933.5453);
